@@ -9,10 +9,10 @@ PORT = 6667
 
 #The Twitch OAuth token from the bot account we will be using. Enter manually for now but should be able to be set up
 #through the frontend login
-PASS = ""
+PASS = "oauth:ih0ym1v1g70ig4j0bddv0u9ak246tu"
 
 #The nickname of the bot account we're sending messages from. I believe this needs to be lowercase?
-NICK = ""
+NICK = "CCG_Bot"
 NICK = NICK.lower()
 
 #Channel we're connecting to and reading from
