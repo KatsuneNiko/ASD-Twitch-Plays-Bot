@@ -1,27 +1,93 @@
-#Required to connect to Twitch
 import socket
 import threading
 import time
 
-#Tell which server and port to connect to, in this case Twitch's server with default port 6667
+# Global variables
+global user
+global message
+
+# Server and port information
 SERVER = "irc.twitch.tv"
 PORT = 6667
 
-#The Twitch OAuth token from the bot account we will be using. Enter manually for now but should be able to be set up
-#through the frontend login
+# OAuth token and bot account information
 PASS = "oauth:ih0ym1v1g70ig4j0bddv0u9ak246tu"
+NICK = "CCG_Bot".lower()
+CHANNEL = "KatsuneNiko".lower()
 
-#The nickname of the bot account we're sending messages from. I believe this needs to be lowercase?
-NICK = "CCG_Bot"
-NICK = NICK.lower()
-
-#Channel we're connecting to and reading from
-CHANNEL = "KatsuneNiko"
-CHANNEL = CHANNEL.lower()
-
-#Connect to Twitch's IRC server and send an encoded message to log into the bot's account and connect to the channel we want
+# Initialize socket and connect to Twitch IRC server
 irc = socket.socket()
 irc.connect((SERVER, PORT))
-irc.send(("PASS " + PASS + "\n" + 
-          "NICK " + NICK + "\n" + 
-          "JOIN #" + CHANNEL + "\n").encode())
+irc.send(f"PASS {PASS}\nNICK {NICK}\nJOIN #{CHANNEL}\n".encode())
+
+
+def twitch():
+    """
+    Handles the Twitch chat interaction.
+    """
+
+    while True:
+        try:
+            readbuffer = irc.recv(1024).decode()
+        except:
+            readbuffer = ""
+        for line in readbuffer.split("\r\n"):
+            if line == "":
+                continue
+            if "PING :tmi.twitch.tv" in line:
+                msgg = "PONG :tmi.twitch.tv\r\n".encode()
+                irc.send(msgg)
+                continue
+            else:
+                user = getUser(line)
+                message = getMessage(line)
+                if user == "" or user == " ":
+                    continue
+                print(user.title() + " : " + message)
+                # Uncomment the next two lines when we create/if we create? gamecontrol function
+                # t2 = threading.Thread(target=gamecontrol)
+                # t2.start()
+
+
+def joinchat():
+    """
+    Joins the Twitch chat.
+    """
+    Loading = True
+    while Loading:
+        readbuffer_join = irc.recv(1024).decode()
+        for line in readbuffer_join.split("\n")[:-1]:
+            Loading = loadingComplete(line)
+
+
+def loadingComplete(line):
+    if "End of /NAMES list" in line:
+        return False
+    else:
+        return True
+
+
+def sendMessage(irc, message):
+    messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
+    irc.send((messageTemp + "\n").encode())
+
+
+def getUser(line):
+    colons = line.count(":")
+    separate = line.split(":", colons)
+    user = separate[1].split("!", 1)[0]
+    return user
+
+
+def getMessage(line):
+    try:
+        colons = line.count(":")
+        message = (line.split(":", colons))[colons]
+    except:
+        message = ""
+    return message
+
+
+# Start the Twitch bot
+t1 = threading.Thread(target=twitch)
+t1.start()
