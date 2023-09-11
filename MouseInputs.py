@@ -6,24 +6,25 @@ def MouseInputs(message):
     testMessage = message.lower()
 
     # Map keywords to mouse inputs
-    if testMessage == 'move_up':
-        moveMouse(0, -100)
-    elif testMessage == 'move_down':
-        moveMouse(0, 100)
-    elif testMessage == 'move_left':
-        moveMouse(-100, 0)
-    elif testMessage == 'move_right':
-        moveMouse(100, 0)
-    elif testMessage == 'click_left':
-        clickMouse('left')
-    elif testMessage == 'click_right':
-        clickMouse('right')
-    elif testMessage == 'scroll_up':
-        scrollMouse(1)
-    elif testMessage == 'scroll_down':
-        scrollMouse(-1)
-    elif testMessage == 'time':
-        print(time.time())
+    match testMessage:
+        case 'move_up':
+            moveMouse(0, -100)
+        case 'move_down':
+            moveMouse(0, 100)
+        case 'move_left':
+            moveMouse(-100, 0)
+        case 'move_right':
+            moveMouse(100, 0)
+        case 'click_left':
+            clickMouse('left')
+        case 'click_right':
+            clickMouse('right')
+        case 'scroll_up':
+            scrollMouse(1)
+        case 'scroll_down':
+            scrollMouse(-1)
+        case 'time':
+            print(time.time())
 
 # Move the mouse by (dx, dy) pixels
 def moveMouse(dx, dy):
