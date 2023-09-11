@@ -28,7 +28,7 @@ def twitch():
     """
     Handles the Twitch chat interaction.
     """
-
+    
     while True:
         try:
             readbuffer = irc.recv(1024).decode()
