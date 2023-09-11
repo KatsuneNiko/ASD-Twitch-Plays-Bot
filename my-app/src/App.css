@@ -1,38 +1,62 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  display: flex;
   min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(em.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: brightness(30%); 
+  }
+
+
+}
+
+
+.login-form {
+  text-align: center;
+  color: greenyellow;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 400px;
+  padding: 2rem;
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);
+  filter: brightness(80%); 
 }
 
-.App-link {
-  color: #61dafb;
+.input-container {
+  margin-bottom: 10px; 
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button {
+  border: none;
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: greenyellow;
+}
+
+.input {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);
+  border: 2px solid white;
 }
