@@ -44,7 +44,6 @@ def display_stats():
         print("\n")
 
         # Sleep for 30 seconds before displaying statistics again
-        # Display statistics every 10 seconds (adjust as needed)
         time.sleep(30)
 
 # Start a thread to display statistics
