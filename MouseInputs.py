@@ -1,5 +1,7 @@
 import pyautogui
 import time
+import math
+
 
 # Takes the user message as a parameter.
 def MouseInputs(message):
@@ -23,6 +25,8 @@ def MouseInputs(message):
             scrollMouse(1)
         case 'scroll_down':
             scrollMouse(-1)
+        # case 'draw_circle':
+        #     draw_circle(100)
         case 'time':
             print(time.time())
 
@@ -38,3 +42,29 @@ def clickMouse(button):
 # Scroll the mouse wheel
 def scrollMouse(amount):
     pyautogui.scroll(amount)
+
+# #Draw a circle with the mouse
+#Sorry this is a dumb idea
+# def draw_circle(radius, num_points=100):
+#     # Get the current mouse position
+#     x_center, y_center = pyautogui.position()
+    
+#     # Calculate the angle increment between each point
+#     angle_increment = 2 * math.pi / num_points
+    
+#     # Pause for a moment before drawing
+#     time.sleep(2)
+    
+#     for i in range(num_points + 1):
+#         # Calculate the angle at this point
+#         angle = i * angle_increment
+        
+#         # Calculate the x and y coordinates for this point
+#         x = x_center + radius * math.cos(angle)
+#         y = y_center + radius * math.sin(angle)
+        
+#         # Move the mouse to this position
+#         pyautogui.moveTo(x, y, duration=0.1)
+
+# # Draw a circle with a radius of 100 pixels
+# draw_circle(100)
