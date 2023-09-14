@@ -45,7 +45,7 @@ steps:
     pip install pytest pytest-azurepipelines
     pip install -e .
   displayName: 'Install dependencies'
-
+  
 - script: |
     python -m pytest tests/
   displayName: 'pytest'
