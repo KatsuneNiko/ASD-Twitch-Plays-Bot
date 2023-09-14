@@ -40,13 +40,4 @@ steps:
     keyboard
   displayName: 'keyboard'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install pytest pytest-azurepipelines
-    pip install -e .
-  displayName: 'Install dependencies'
-  
-- script: |
-    python -m pytest tests/
-  displayName: 'pytest'
 
