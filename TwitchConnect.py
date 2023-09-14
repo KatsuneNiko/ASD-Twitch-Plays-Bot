@@ -1,21 +1,23 @@
 import socket
 import threading
 import time
+import KeyboardInputs
 
-# Global variables
+##Global variables
 global user
 global message
 
-# Server and port information
+##Server and port information
 SERVER = "irc.twitch.tv"
 PORT = 6667
 
-# OAuth token and bot account information
-PASS = "oauth:ih0ym1v1g70ig4j0bddv0u9ak246tu"
+##OAuth token and bot account information
+##tokens can be found here... https://twitchapps.com/tmi/
+PASS = "oauth:acg413d5tln1omi9omb72lbkgje0e1"
 NICK = "CCG_Bot".lower()
-CHANNEL = "KatsuneNiko".lower()
+CHANNEL = "nekonatic".lower()
 
-# Initialize socket and connect to Twitch IRC server
+##Initialize socket and connect to Twitch IRC server
 irc = socket.socket()
 irc.connect((SERVER, PORT))
 irc.send(f"PASS {PASS}\nNICK {NICK}\nJOIN #{CHANNEL}\n".encode())
@@ -44,9 +46,8 @@ def twitch():
                 if user == "" or user == " ":
                     continue
                 print(user.title() + " : " + message)
-                # Uncomment the next two lines when we create/if we create? gamecontrol function
-                # t2 = threading.Thread(target=gamecontrol)
-                # t2.start()
+                KeyboardInputs.KeyboardInputs(message)
+
 
 
 def joinchat():
@@ -64,8 +65,7 @@ def loadingComplete(line):
     if "End of /NAMES list" in line:
         return False
     else:
-        return True
-
+        return True    
 
 def sendMessage(irc, message):
     messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
@@ -88,8 +88,6 @@ def getMessage(line):
     return message
 
 
-# Start the Twitch bot
+##Start the Twitch bot
 t1 = threading.Thread(target=twitch)
 t1.start()
-#Another change again
-
