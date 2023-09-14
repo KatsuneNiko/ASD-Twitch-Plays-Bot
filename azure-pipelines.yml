@@ -35,12 +35,12 @@ steps:
     pytest
   displayName: 'pytest'
 
-  - script: |
+- script: |
     pip install keyboard
     keyboard
   displayName: 'keyboard'
 
-  - script: |
+- script: |
     python -m pip install --upgrade pip
     pip install pytest pytest-azurepipelines
     pip install -e .
