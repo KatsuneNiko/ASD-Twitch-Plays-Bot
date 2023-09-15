@@ -2,6 +2,7 @@ import socket
 import threading
 import time
 import KeyboardInputs
+import MouseInputs
 
 ##Global variables
 global user
@@ -27,7 +28,7 @@ def twitch():
     """
     Handles the Twitch chat interaction.
     """
-
+    
     while True:
         try:
             readbuffer = irc.recv(1024).decode()
@@ -46,7 +47,10 @@ def twitch():
                 if user == "" or user == " ":
                     continue
                 print(user.title() + " : " + message)
+                #Call the keyboard input functions
                 KeyboardInputs.KeyboardInputs(message)
+                #Call the mouse input functions
+                MouseInputs.MouseInputs(message)
 
 
 
