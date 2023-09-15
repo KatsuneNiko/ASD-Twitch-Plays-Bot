@@ -52,9 +52,6 @@ def scrollMouse(amount):
 #     # Calculate the angle increment between each point
 #     angle_increment = 2 * math.pi / num_points
     
-#     # Pause for a moment before drawing
-#     time.sleep(2)
-    
 #     for i in range(num_points + 1):
 #         # Calculate the angle at this point
 #         angle = i * angle_increment
