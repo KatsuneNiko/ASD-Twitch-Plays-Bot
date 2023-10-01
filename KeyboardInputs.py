@@ -9,7 +9,7 @@ import pydirectinput
 
 #takes the user message as a parameter.
 def KeyboardInputs(message):
-    testMessage = message
+    testMessage = message.lower()
 
     #hardcode keywords to keyboard inputs
     if testMessage == 'hello':

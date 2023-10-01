@@ -3,6 +3,7 @@ import threading
 import time
 import KeyboardInputs
 
+
 ##Global variables
 global user
 global message
@@ -22,6 +23,10 @@ irc = socket.socket()
 irc.connect((SERVER, PORT))
 irc.send(f"PASS {PASS}\nNICK {NICK}\nJOIN #{CHANNEL}\n".encode())
 
+#Allows twitch while loop to be paused.
+pauseEvent = threading.Event()
+#Allows twitch while loop to be paused.
+exitEvent = threading.Event()
 
 def twitch():
     """
@@ -47,6 +52,15 @@ def twitch():
                     continue
                 print(user.title() + " : " + message)
                 KeyboardInputs.KeyboardInputs(message)
+
+        if exitEvent.is_set():
+            False
+            break
+
+        if pauseEvent.is_set():
+            False
+        elif pauseEvent.is_set() == False:
+            True
 
 
 
@@ -89,5 +103,5 @@ def getMessage(line):
 
 
 ##Start the Twitch bot
-t1 = threading.Thread(target=twitch)
-t1.start()
+##t1 = threading.Thread(target=twitch)
+##t1.start()
