@@ -13,8 +13,9 @@ while userInput != 'exit':
     print("Press the following to trigger function")
     print("1 - Start chatbot")
     print("2 - Stop chatbot")
-    print("3 - Test open txt. file")
+    print("3 - View Keybinds")
     print("4 - Add keybind")
+    print("5 - Delete keybind")
     print("exit - exit")
     userInput = input("Input one of the following: ")
     os.system('cls')
@@ -47,6 +48,10 @@ while userInput != 'exit':
 
         case '4':
             KeyboardInputs.addKeybind()
+            print("Success!")
+            input("Press any key to continue...")
+        case '5':
+            KeyboardInputs.deleteKeybind()
             print("Success!")
             input("Press any key to continue...")
 

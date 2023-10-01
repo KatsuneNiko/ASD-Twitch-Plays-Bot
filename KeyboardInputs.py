@@ -20,13 +20,10 @@ def KeyboardInputs(message):
                 duration = str(singleLine[1]).lower()
                 keyword = str(singleLine[2]).lower()
                 keybind = str(singleLine[3]).lower()[:-1]
-                print(keybind)
                 if(inputType) == "press":
                     pressKeyNew(keybind)
                 elif(inputType.lower()) == "hold":
-                    holdKey(keybind, duration)
-
-    
+                    holdKey(keybind, duration)    
 
     '''
     #hardcode keywords to keyboard inputs
@@ -51,7 +48,7 @@ def KeyboardInputs(message):
     elif testMessage == 'time':
         print(time.time())
     '''     
-    
+
 def addKeybind():
     holdOrPress = ""
     ##Validation: user must only be able to select hold or press.
@@ -81,6 +78,16 @@ def addKeybind():
     file1.write(str(newLine)+'\n')
     file1.close()
 
+def deleteKeybind():
+    deleteKeyword = input("Which keyword do you want to delete?: ")
+    with open("KeywordsToKeyboard.txt", "r+") as f:
+        d = f.readlines()
+        f.seek(0)
+        for i in d:
+            if deleteKeyword not in i:
+                f.write(i)
+        f.truncate()
+    
 def pressKey(key):
     keyboard.press(key)
     keyboard.release(key)

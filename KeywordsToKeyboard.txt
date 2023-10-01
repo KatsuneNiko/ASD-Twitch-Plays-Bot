@@ -1,2 +1,3 @@
-('press', 'nil', 'up', 'w')
-press,nil,down,s
+press,nil,up,w
+press,nil,left,a
+press,nil,right,d
