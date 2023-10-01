@@ -1,6 +1,7 @@
 import os
 import threading
 import TwitchConnect
+import KeyboardInputs
 
 
 userInput = ''
@@ -12,7 +13,8 @@ while userInput != 'exit':
     print("Press the following to trigger function")
     print("1 - Start chatbot")
     print("2 - Stop chatbot")
-    print("3 - Open txt. file")
+    print("3 - Test open txt. file")
+    print("4 - Add keybind")
     print("exit - exit")
     userInput = input("Input one of the following: ")
     os.system('cls')
@@ -43,8 +45,13 @@ while userInput != 'exit':
             print(f.read())
             input("Press any key to continue...")
 
+        case '4':
+            KeyboardInputs.addKeybind()
+            print("Success!")
+            input("Press any key to continue...")
+
         case 'exit':
             TwitchConnect.exitEvent.set()
             pass
-
+        
     os.system('cls')
