@@ -1,1 +1,2 @@
-Hello world!
+('press', 'nil', 'up', 'w')
+press,nil,down,s
