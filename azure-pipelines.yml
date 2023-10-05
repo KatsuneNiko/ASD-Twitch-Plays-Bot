@@ -29,7 +29,7 @@ steps:
 #     pytest
 #   displayName: 'pytest'
 
-# - script: |
-#     pip install keyboard
-#     keyboard
-#   displayName: 'keyboard'
+- script: |
+    pip install keyboard
+    keyboard
+  displayName: 'keyboard'
