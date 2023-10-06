@@ -1,22 +1,28 @@
 import pyautogui
 import time
-import math
-
+import re  # Regular expressions for parsing the message
 
 # Takes the user message as a parameter.
 def MouseInputs(message):
-    testMessage = message.lower()
+    # Use regular expressions to separate the command and the optional distance
+    match = re.match(r'([a-z_]+)(\d+)?', message.lower())
+    if not match:
+        print("Invalid command")
+        return
+
+    command, distance_str = match.groups()
+    distance = int(distance_str) if distance_str else 100  # Default distance is 100
 
     # Map keywords to mouse inputs
-    match testMessage:
+    match command:
         case 'move_up':
-            moveMouse(0, -100)
+            moveMouse(0, -distance)
         case 'move_down':
-            moveMouse(0, 100)
+            moveMouse(0, distance)
         case 'move_left':
-            moveMouse(-100, 0)
+            moveMouse(-distance, 0)
         case 'move_right':
-            moveMouse(100, 0)
+            moveMouse(distance, 0)
         case 'click_left':
             clickMouse('left')
         case 'click_right':
@@ -25,8 +31,6 @@ def MouseInputs(message):
             scrollMouse(1)
         case 'scroll_down':
             scrollMouse(-1)
-        # case 'draw_circle':
-        #     draw_circle(100)
         case 'time':
             print(time.time())
 
@@ -42,6 +46,7 @@ def clickMouse(button):
 # Scroll the mouse wheel
 def scrollMouse(amount):
     pyautogui.scroll(amount)
+
 
 # #Draw a circle with the mouse
 #Sorry this is a dumb idea
