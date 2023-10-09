@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Login = () => {
+export const Login = (props) => {
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
   const [error, setError] = useState("");
@@ -43,6 +43,7 @@ export const Login = () => {
         <label for="password"><b>Password&nbsp;&nbsp;&nbsp;</b></label>
         <input class="input" type="password" value={password} onChange={(e) => setPass(e.target.value)}></input>
         </div>
+        <button type="button" class="button" onClick={() => props.onFormSwitch()}>Register</button>
         <button type="submit" class="button">Login</button>
        </form>
        {error && <p className="error">{error}</p>}
