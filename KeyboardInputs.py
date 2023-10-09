@@ -5,13 +5,12 @@ import keyboard
 import TwitchConnect
 import pydirectinput
 import os
-
-profile = ''
+import ProfileManager
 
 #takes the user message as a parameter.
 def KeyboardInputs(message):
     testMessage = message.lower()
-    with open("profiles/" + profile + ".txt") as f:
+    with open("profiles/" + ProfileManager.profile + ".txt") as f:
         for l_no, lines in enumerate(f):
             if testMessage in lines:
                 singleLine = lines
@@ -70,7 +69,7 @@ def addKeybind():
     ##Validation: valid keyboard bind
     allocatedKeybind = input("What key is this binded to?: ")
 
-    file1 = open("profiles/" + profile + ".txt", "a")
+    file1 = open("profiles/" + ProfileManager.profile + ".txt", "a")
     if holdOrPress.lower() == 'hold':
         newLine = holdOrPress + "," + duration + "," + chosenKeyword + "," + allocatedKeybind
     else:
@@ -80,7 +79,7 @@ def addKeybind():
 
 def deleteKeybind():
     deleteKeyword = input("Which keyword do you want to delete?: ")
-    with open("profiles/" + profile + ".txt", "r+") as f:
+    with open("profiles/" + ProfileManager.profile + ".txt", "r+") as f:
         d = f.readlines()
         f.seek(0)
         for i in d:

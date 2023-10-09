@@ -1,20 +1,23 @@
 import os
 import threading
 import TwitchConnect
-import KeyboardInputs
+import ProfileManager
 
 if __name__ == '__main__':
     userInput = ''
-    currentProfile = ''
     t1 = threading.Thread(target=TwitchConnect.twitch)
-    ##t2 = TwitchConnect.twitch()
+    #t2 = TwitchConnect.twitch()
 
     while userInput != 'exit':
-        print("Twitch Plays Bot v2")
-        if currentProfile != '':
-            print("Currently loaded profile: " + currentProfile)
+        print("Twitch Plays Chatbot v2")
+        if ProfileManager.profile != '':
+            print("Currently loaded profile: " + ProfileManager.profile)
         else:
             print("No profile currently loaded. Select or create a profile to get started")
+        if t1.is_alive() and TwitchConnect.pauseEvent.is_set() == False:
+            print("Chatbot is active")
+        else:
+            print("Chatbot is not active")
         print("1 - Select/create profile")
         print("2 - Delete current profile")
         print("3 - Start chatbot")
@@ -27,36 +30,15 @@ if __name__ == '__main__':
         os.system('cls')
         match userInput:
             case '1':
-                tempProfile = input("Input the profile you'd like to use (case sensitive): ")
-                if os.path.exists("profiles/" + tempProfile + ".txt"):
-                    print("Profile " + tempProfile + " has been selected")
-                    currentProfile = tempProfile
-                else:
-                    createNew = input("Unable to find profile. Create a new profile with name " + tempProfile + "? (yes/no) ")
-                    if createNew.lower() == 'yes':
-                        open("profiles/" + tempProfile + ".txt", 'x')
-                        print("Profile " + tempProfile + " has been created")
-                        currentProfile = tempProfile
-                    else:
-                        print("Profile was not created")
+                ProfileManager.selectProfile()
                 input("Press any key to continue... ")
 
             case '2':
-                if os.path.exists("profiles/" + currentProfile + ".txt"):
-                    deleteConfirmation = input("Are you sure you would like to delete profile " + currentProfile + "? (yes/no) ")
-                    if deleteConfirmation.lower() == 'yes':
-                        os.remove("profiles/" + currentProfile + ".txt")
-                        print("Profile " + currentProfile + " has been deleted")
-                        currentProfile = ''
-                    else:
-                        print("Profile deletion has been cancelled")
-                else:
-                    print("Unable to find current profile")
+                ProfileManager.deleteProfile()
                 input("Press any key to continue... ")
 
             case '3':
-                if os.path.exists("profiles/" + currentProfile + ".txt"):
-                    KeyboardInputs.profile = currentProfile
+                if ProfileManager.profileExists(ProfileManager.profile):
                     if t1.is_alive() and TwitchConnect.pauseEvent.is_set() == False:
                         print("Chatbot is already active")
                     elif t1.is_alive() and TwitchConnect.pauseEvent.is_set() == True:
@@ -80,32 +62,15 @@ if __name__ == '__main__':
                 input("Press any key to continue... ")
 
             case '5':
-                if os.path.exists("profiles/" + currentProfile + ".txt"):
-                    if os.path.getsize("profiles/" + currentProfile + ".txt") > 0:
-                        f = open("profiles/" + currentProfile + ".txt", "r")
-                        print(f.read())
-                    else:
-                        print("No keybinds exist in current profile")
-                else:
-                    print("Unable to find current profile")
+                ProfileManager.viewProfile()
                 input("Press any key to continue... ")
 
             case '6':
-                if os.path.exists("profiles/" + currentProfile + ".txt"):
-                    KeyboardInputs.profile = currentProfile
-                    KeyboardInputs.addKeybind()
-                    print("Success!")
-                else:
-                    print("Unable to find current profile")
+                ProfileManager.addKeybind()
                 input("Press any key to continue... ")
 
             case '7':
-                if os.path.exists("profiles/" + currentProfile + ".txt"):
-                    KeyboardInputs.profile = currentProfile
-                    KeyboardInputs.deleteKeybind()
-                    print("Success!")
-                else:
-                    print("Unable to find current profile")
+                ProfileManager.deleteKeybind()
                 input("Press any key to continue... ")
 
             case 'exit':
