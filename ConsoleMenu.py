@@ -3,6 +3,7 @@ import threading
 import TwitchConnect
 import KeyboardInputs
 
+
 if __name__ == '__main__':
     userInput = ''
     t1 = threading.Thread(target=TwitchConnect.twitch)

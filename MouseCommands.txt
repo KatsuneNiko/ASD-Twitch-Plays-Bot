@@ -1,0 +1,10 @@
+move_up
+move_down
+move_left
+move_right
+click_left
+click_right
+scroll_up
+scroll_down
+draw_circle
+time
