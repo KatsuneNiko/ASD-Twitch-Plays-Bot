@@ -5,6 +5,7 @@
 
 trigger:
 - main
+- releases/keyboard-input-profiles
 
 pool:
   vmImage: ubuntu-latest
