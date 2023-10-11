@@ -4,7 +4,6 @@ import time
 import KeyboardInputs
 import MouseInputs
 
-
 ##Global variables
 global user
 global message
@@ -52,21 +51,18 @@ def twitch():
                 if user == "" or user == " ":
                     continue
                 print(user.title() + " : " + message)
-                #Call the keyboard input functions
-                KeyboardInputs.KeyboardInputs(message)
-                #Call the mouse input functions
-                MouseInputs.MouseInputs(message)
+                
+                # Check if the command was recognized and executed by KeyboardInputs
+                if not KeyboardInputs.KeyboardInputs(message):
+                    # If not, then check MouseInputs
+                    MouseInputs.MouseInputs(message, sendMessage)
+                    
 
         if exitEvent.is_set():
-            False
             break
 
         if pauseEvent.is_set():
-            False
-        elif pauseEvent.is_set() == False:
-            True
-
-
+            continue
 
 def joinchat():
     """
@@ -78,24 +74,22 @@ def joinchat():
         for line in readbuffer_join.split("\n")[:-1]:
             Loading = loadingComplete(line)
 
-
 def loadingComplete(line):
     if "End of /NAMES list" in line:
         return False
     else:
         return True    
 
-def sendMessage(irc, message):
+def sendMessage(message):
+    print("This function is being called")
     messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
     irc.send((messageTemp + "\n").encode())
-
 
 def getUser(line):
     colons = line.count(":")
     separate = line.split(":", colons)
     user = separate[1].split("!", 1)[0]
     return user
-
 
 def getMessage(line):
     try:
@@ -105,7 +99,8 @@ def getMessage(line):
         message = ""
     return message
 
-
 ##Start the Twitch bot
 t1 = threading.Thread(target=twitch)
 t1.start()
+
+

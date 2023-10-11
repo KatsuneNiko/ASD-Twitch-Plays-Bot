@@ -8,3 +8,5 @@ scroll_up
 scroll_down
 draw_circle
 time
+click_coordinates
+show_commands

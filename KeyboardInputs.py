@@ -2,7 +2,6 @@ import socket
 import threading
 import time
 import keyboard
-import TwitchConnect
 import pydirectinput
 import os
 import datetime

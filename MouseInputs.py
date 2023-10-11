@@ -17,11 +17,14 @@ def create_text_file():
         file.write('scroll_down\n')
         file.write('draw_circle\n')
         file.write('time\n')
+        file.write('click_coordinates\n')
+        file.write('show_commands\n')  # Added this line
 
-# Load allowed commands from MouseCommands.txt
 def load_allowed_commands():
     with open('MouseCommands.txt', 'r') as file:
-        return [line.strip() for line in file]
+        commands = [line.strip() for line in file if line.strip()]
+    return commands
+
 
 # Ensure the text file is created first
 create_text_file()
@@ -35,27 +38,41 @@ def process_twitch_message(message):
         print(f"Command '{command}' is not allowed!")
         return
 
-    # Execute the command
-    MouseInputs(message)
+    # If the command is 'show_commands', display the list of valid commands
+    if command == 'show_commands':
+        show_valid_commands()
+    else:
+        # Execute the command
+        MouseInputs(message)
 
-def MouseInputs(message):
-    match = re.match(r'([a-z_]+)(\d+)?', message.lower())
+def show_valid_commands(send_func):
+    commands = []
+    with open('MouseCommands.txt', 'r') as file:
+        for line in file:
+            cmd = line.strip()
+            commands.append(cmd)
+    
+    # Join the command names into a single string and send
+    send_func(', '.join(commands))
+
+
+def MouseInputs(message, send_func):
+    match = re.match(r'([a-z_]+)(\d+)?,?(\d+)?', message.lower())
     if not match:
         print("Invalid command")
         return
 
-    command, distance_str = match.groups()
-    distance = int(distance_str) if distance_str else 100
+    command, arg1, arg2 = match.groups()
 
     match command:
         case 'move_up':
-            moveMouse(0, -distance)
+            moveMouse(0, -int(arg1) if arg1 else -100)
         case 'move_down':
-            moveMouse(0, distance)
+            moveMouse(0, int(arg1) if arg1 else 100)
         case 'move_left':
-            moveMouse(-distance, 0)
+            moveMouse(-int(arg1) if arg1 else -100, 0)
         case 'move_right':
-            moveMouse(distance, 0)
+            moveMouse(int(arg1) if arg1 else 100, 0)
         case 'click_left':
             clickMouse('left')
         case 'click_right':
@@ -65,9 +82,16 @@ def MouseInputs(message):
         case 'scroll_down':
             scrollMouse(-1)
         case 'draw_circle':
-            draw_circle(distance)
+            draw_circle(int(arg1) if arg1 else 100)
         case 'time':
             print(time.time())
+        case 'click_coordinates':
+            if arg1 and arg2:
+                click_coordinates(int(arg1), int(arg2))
+            else:
+                print("Invalid coordinates")
+        case 'show_commands':
+            show_valid_commands(send_func)
 
 def moveMouse(dx, dy):
     x, y = pyautogui.position()
@@ -88,5 +112,9 @@ def draw_circle(radius, num_points=100):
         x = x_center + radius * math.cos(angle)
         y = y_center + radius * math.sin(angle)
         pyautogui.moveTo(x, y, duration=0.1)
+
+def click_coordinates(x, y):
+    pyautogui.moveTo(x, y, duration=0.2)
+    pyautogui.click()
 
 
