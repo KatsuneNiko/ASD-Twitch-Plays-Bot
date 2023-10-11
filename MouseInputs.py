@@ -117,4 +117,6 @@ def click_coordinates(x, y):
     pyautogui.moveTo(x, y, duration=0.2)
     pyautogui.click()
 
-
+def add_allowed_command(command):
+    with open('MouseCommands.txt', 'a') as f:
+        f.write(command + '\n')

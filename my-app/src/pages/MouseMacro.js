@@ -16,6 +16,8 @@ function MouseMacro() {
             <h1>Mouse Macro Page</h1>
             <button onClick={createNewFile}>Create New Text File</button>
         </div>
+
+        
     );
 }
 
