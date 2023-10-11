@@ -25,6 +25,12 @@
   -webkit-text-stroke-color: black;
 }
 
+.success {
+  color: greenyellow;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+}
+
 .login-form {
   text-align: center;
   color: greenyellow;
