@@ -49,4 +49,9 @@ export const SidebarData = [
     path: "/AccountSetting",
     icon: <IoIcons.IoMdHelpCircle />,
   },
+  {
+    title: "Mouse Macro",
+    path: "/MouseMacro",
+    icon: <FaIcons.FaMouse />,
+  }
 ];

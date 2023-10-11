@@ -6,6 +6,7 @@ import AccountSetting from "./pages/AccountSetting";
 import Marcos from "./pages/Marcos"; 
 import Participation from "./pages/Participation";
 import Statistics from "./pages/Statistics";  
+import MouseMacro from "./pages/MouseMacro";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/Participation' element={<Participation/>} />
         <Route path='/Statistics' element={<Statistics/>} />
         <Route path='/AccountSetting' element={<AccountSetting/>} />
+        <Route path="/MouseMacro" element={<MouseMacro />} />
       </Routes>
     </Router>
   );
