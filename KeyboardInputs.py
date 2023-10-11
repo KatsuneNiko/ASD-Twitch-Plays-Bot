@@ -5,54 +5,48 @@ import keyboard
 import TwitchConnect
 import pydirectinput
 import os
-import datetime
+import ProfileManager
 
 #takes the user message as a parameter.
 def KeyboardInputs(message):
     testMessage = message.lower()
-    totalMessages = []
-    with open('KeywordsToKeyboard.txt') as f:
-        for l_no, validKeybinds in enumerate(f):
-            readSingleLine = validKeybinds
-            readSingleLine = readSingleLine.split(",")
-            readKeyword = str(readSingleLine[2]).lower()
-            if testMessage in readKeyword:
-                singleLine = validKeybinds
+    with open("profiles/" + ProfileManager.profile + ".txt") as f:
+        for l_no, lines in enumerate(f):
+            if testMessage in lines:
+                singleLine = lines
                 singleLine = singleLine.split(",")
                 inputType = str(singleLine[0]).lower()
                 duration = str(singleLine[1]).lower()
                 keyword = str(singleLine[2]).lower()
                 keybind = str(singleLine[3]).lower()[:-1]
-                playWithAnarchyMode(inputType, keybind, duration)  
+                if(inputType) == "press":
+                    pressKeyNew(keybind)
+                elif(inputType.lower()) == "hold":
+                    holdKey(keybind, duration)    
 
-def playWithDemocraticMode(message):
-    democraticStarted = False
-    endTime = None
-    myList = []
-    if democraticStarted == False:
-                    myList.clear()
-                    democraticStarted = True
-                    endTime = datetime.datetime.now() + datetime.timedelta(seconds=10)
-                    myList.append(message)
-    elif democraticStarted == True:
-        if datetime.datetime.now() >= endTime:
-            mostCommon = most_frequent(myList)
-            KeyboardInputs(mostCommon)
-            myList.clear()
-            myList.append(message)
-            endTime = datetime.datetime.now() + datetime.timedelta(seconds=10)
-        else:
-            myList.append(message)
-
-def playWithAnarchyMode(holdOrPress, key, potentialTime):
-    time = potentialTime ##make sure to validate in frontend
-    if(holdOrPress) == "press":
-        pressKeyNew(key)
-    elif(holdOrPress.lower()) == "hold":
-        holdKey(key, time) 
-
-def most_frequent(List):
-    return max(set(List), key = List.count)
+    '''
+    #hardcode keywords to keyboard inputs
+    if testMessage == 'hello':
+        typeMessage(testMessage)
+    elif testMessage == 'up':
+        pressKeyNew('w')
+    elif testMessage == 'down':
+        pressKeyNew('s')
+    elif testMessage == 'left':
+        pressKeyNew('a')
+    elif testMessage == 'right':
+        pressKeyNew('d')
+    elif testMessage == 'a':
+        pressKeyNew('x')
+    elif testMessage == 'b':
+        pressKeyNew('z')
+    elif testMessage == 'start':
+        pressKeyNew('o')
+    elif testMessage == 'select':
+        pressKeyNew('p')
+    elif testMessage == 'time':
+        print(time.time())
+    '''     
 
 def addKeybind():
     holdOrPress = ""
@@ -75,7 +69,7 @@ def addKeybind():
     ##Validation: valid keyboard bind
     allocatedKeybind = input("What key is this binded to?: ")
 
-    file1 = open("KeywordsToKeyboard.txt", "a")
+    file1 = open("profiles/" + ProfileManager.profile + ".txt", "a")
     if holdOrPress.lower() == 'hold':
         newLine = holdOrPress + "," + duration + "," + chosenKeyword + "," + allocatedKeybind
     else:
@@ -85,7 +79,7 @@ def addKeybind():
 
 def deleteKeybind():
     deleteKeyword = input("Which keyword do you want to delete?: ")
-    with open("KeywordsToKeyboard.txt", "r+") as f:
+    with open("profiles/" + ProfileManager.profile + ".txt", "r+") as f:
         d = f.readlines()
         f.seek(0)
         for i in d:
@@ -93,9 +87,9 @@ def deleteKeybind():
                 f.write(i)
         f.truncate()
     
-def pressKey(key):
-    keyboard.press(key)
-    keyboard.release(key)
+# def pressKey(key):
+#     keyboard.press(key)
+#     keyboard.release(key)
 
 def pressKeyNew(key):
     pydirectinput.press(key)
