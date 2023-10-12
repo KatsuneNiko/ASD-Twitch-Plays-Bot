@@ -5,6 +5,11 @@
 
 trigger:
 - main
+- NekosBranch
+
+pr:
+- main
+- NekosBranch
 
 pool:
   vmImage: ubuntu-latest
