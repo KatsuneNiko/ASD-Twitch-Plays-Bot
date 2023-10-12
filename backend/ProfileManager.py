@@ -1,10 +1,10 @@
 import os
-import KeyboardInputs
+import KeyboardInputs as KeyboardInputs
 
 profile = ''
 
 def profileExists(name):
-    return os.path.exists("profiles/" + name + ".txt")
+    return os.path.exists("backend/profiles/" + name + ".txt")
 
 def selectProfile():
     global profile

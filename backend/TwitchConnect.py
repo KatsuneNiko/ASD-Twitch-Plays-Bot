@@ -1,8 +1,8 @@
 import socket
 import threading
 import time
-import KeyboardInputs
-import MouseInputs
+import KeyboardInputs as KeyboardInputs
+import MouseInputs as MouseInputs
 
 ##Global variables
 global user

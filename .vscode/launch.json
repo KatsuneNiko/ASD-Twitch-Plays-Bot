@@ -8,9 +8,10 @@
             "name": "Run App",
             "type": "python",
             "request": "launch",
-            "program": "ConsoleMenu.py",
+            "program": "backend/ConsoleMenu.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
     ]
+    
 }

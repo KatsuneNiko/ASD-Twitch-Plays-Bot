@@ -4,7 +4,7 @@ import time
 import keyboard
 import pydirectinput
 import os
-import ProfileManager
+import ProfileManager as ProfileManager
 
 #takes the user message as a parameter.
 def KeyboardInputs(message):

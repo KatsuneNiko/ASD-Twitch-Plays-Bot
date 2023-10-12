@@ -1,4 +1,4 @@
-import ProfileManager
+import backend.ProfileManager as ProfileManager
 
 def test_createProfile():
     ProfileManager.createProfile("TestProfile")
