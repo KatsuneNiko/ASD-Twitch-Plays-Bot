@@ -45,8 +45,8 @@ def deleteProfile(name):
 def viewProfile():
     global profile
     if profileExists(profile):
-        if os.path.getsize("profiles/" + profile + ".txt") > 0:
-            f = open("profiles/" + profile + ".txt", "r")
+        if os.path.getsize("backend/profiles/" + profile + ".txt") > 0:
+            f = open("backend/profiles/" + profile + ".txt", "r")
             print(f.read())
         else:
             print("No keybinds exist in current profile")

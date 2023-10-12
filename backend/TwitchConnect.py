@@ -1,8 +1,10 @@
 import socket
 import threading
 import time
-import KeyboardInputs as KeyboardInputs
-import MouseInputs as MouseInputs
+import KeyboardInputs
+import MouseInputs
+import datetime
+
 
 ##Global variables
 global user
@@ -10,6 +12,10 @@ global message
 global channelname
 global CHANNEL
 global irc
+
+styleOfPlay = 'anarchy'
+votingTime = 10.0
+totalMessages = []
 
 channelname = ''
 
@@ -28,6 +34,10 @@ def twitch():
     PASS = "oauth:acg413d5tln1omi9omb72lbkgje0e1"
     NICK = "CCG_Bot".lower()
     CHANNEL = channelname.lower()
+
+    democraticStarted = False
+    endTime = None
+    myList = []
 
     ##Initialize socket and connect to Twitch IRC server
     irc = socket.socket()
@@ -54,9 +64,25 @@ def twitch():
                     continue
                 print(user.title() + " : " + message)
                 #Call the keyboard input functions
-                KeyboardInputs.KeyboardInputs(message)
-                #Call the mouse input functions
                 MouseInputs.MouseInputs(message)
+                if styleOfPlay == 'anarchy':
+                    KeyboardInputs.KeyboardInputs(message)
+                elif styleOfPlay == 'democratic':
+                    if democraticStarted == False:
+                        myList.clear()
+                        democraticStarted = True
+                        endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                        myList.append(message)
+                    elif democraticStarted == True:
+                        if datetime.datetime.now() >= endTime:
+                            ##print("Total messages: ", *myList)
+                            mostCommon = most_frequent(myList)
+                            KeyboardInputs.KeyboardInputs(mostCommon)
+                            myList.clear()
+                            myList.append(message)
+                            endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                        else:
+                            myList.append(message)
 
         if exitEvent.is_set():
             False
@@ -99,6 +125,16 @@ def getMessage(line):
         message = ""
     return message
 
+def setStyleOfPlay(inputSOP, userSecondsInput):
+    global styleOfPlay
+    global votingTime
+
+    if inputSOP in {'anarchy', 'democratic'}:
+        styleOfPlay = inputSOP
+        votingTime = userSecondsInput
+
+def most_frequent(List):
+    return max(set(List), key = List.count)
 ##Start the Twitch bot
 ##t1 = threading.Thread(target=twitch)
 ##t1.start()
