@@ -3,6 +3,15 @@ import { useState } from 'react';
 
 
 const CRUDKeyboard = () =>  {
+    const [SOP, setSOP] = useState([])
+    
+        fetch('/CRUDKeyboard').then(response => {
+            return response.json()
+          }).then(data => {
+            setSOP(data)
+            console.log(data);
+          })
+
     return (
         <div>
             <h1>CRUD Keyboard</h1>

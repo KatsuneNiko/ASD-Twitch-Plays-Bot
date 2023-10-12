@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react"
 
 const StyleOfPlay = () =>  {    
     
-    
-
     const [SOP, setSOP] = useState([])
     
         fetch('/StyleOfPlay').then(response => {

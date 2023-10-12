@@ -5,6 +5,8 @@ import os
 import ProfileManager
 
 #takes the user message as a parameter.
+wasSomethingPressed = False
+
 def KeyboardInputs(message):
     testMessage = message.lower()
     with open("backend/profiles/" + ProfileManager.profile + ".txt") as f:
@@ -90,6 +92,8 @@ def deleteKeybind():
 
 def pressKeyNew(key):
     pydirectinput.press(key)
+    global wasSomethingPressed 
+    wasSomethingPressed = True
 
 def holdKey(key, seconds):
     currentTime = time.time()
@@ -104,3 +108,6 @@ def holdKey(key, seconds):
 def typeMessage(inputMessage):
     for x in inputMessage:
         keyboard.press(x)
+
+def somethingWasPressed():
+    return wasSomethingPressed
