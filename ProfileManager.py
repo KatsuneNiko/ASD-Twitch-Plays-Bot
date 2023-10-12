@@ -30,13 +30,17 @@ def deleteProfile():
     if profileExists(profile):
         deleteConfirmation = input("Are you sure you would like to delete profile " + profile + "? (yes/no) ")
         if deleteConfirmation.lower() == 'yes':
-            os.remove("profiles/" + profile + ".txt")
-            print("Profile " + profile + " has been deleted")
-            profile = ''
+            deleteProfile(profile)
         else:
             print("Profile deletion has been cancelled")
     else:
         print("Unable to find current profile")
+
+def deleteProfile(name):
+    global profile
+    os.remove("profiles/" + name + ".txt")
+    print("Profile " + name + " has been deleted")
+    profile = ''
 
 def viewProfile():
     global profile

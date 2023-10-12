@@ -7,21 +7,15 @@ import MouseInputs
 ##Global variables
 global user
 global message
+global channelname
+global CHANNEL
+global irc
+
+channelname = ''
 
 ##Server and port information
 SERVER = "irc.twitch.tv"
 PORT = 6667
-
-##OAuth token and bot account information
-##tokens can be found here... https://twitchapps.com/tmi/
-PASS = "oauth:acg413d5tln1omi9omb72lbkgje0e1"
-NICK = "CCG_Bot".lower()
-CHANNEL = "nekonatic".lower()
-
-##Initialize socket and connect to Twitch IRC server
-irc = socket.socket()
-irc.connect((SERVER, PORT))
-irc.send(f"PASS {PASS}\nNICK {NICK}\nJOIN #{CHANNEL}\n".encode())
 
 #Allows twitch while loop to be paused.
 pauseEvent = threading.Event()
@@ -29,10 +23,18 @@ pauseEvent = threading.Event()
 exitEvent = threading.Event()
 
 def twitch():
-    """
-    Handles the Twitch chat interaction.
-    """
+    ##OAuth token and bot account information
+    ##tokens can be found here... https://twitchapps.com/tmi/
+    PASS = "oauth:acg413d5tln1omi9omb72lbkgje0e1"
+    NICK = "CCG_Bot".lower()
+    CHANNEL = channelname.lower()
+
+    ##Initialize socket and connect to Twitch IRC server
+    irc = socket.socket()
+    irc.connect((SERVER, PORT))
+    irc.send(f"PASS {PASS}\nNICK {NICK}\nJOIN #{CHANNEL}\n".encode())
     
+    #Handles twitch chat interaction
     while True:
         try:
             readbuffer = irc.recv(1024).decode()
@@ -66,9 +68,7 @@ def twitch():
             True
 
 def joinchat():
-    """
-    Joins the Twitch chat.
-    """
+    ##Joins Twitch chat
     Loading = True
     while Loading:
         readbuffer_join = irc.recv(1024).decode()

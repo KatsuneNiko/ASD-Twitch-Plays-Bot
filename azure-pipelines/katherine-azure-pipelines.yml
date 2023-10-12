@@ -9,7 +9,7 @@ trigger:
       - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 strategy:
   matrix:
     Python311:
@@ -29,4 +29,4 @@ steps:
 - script: |
     pip install pytest pytest-azurepipelines
     pytest
-  displayName: 'pytest'
+  displayName: 'Run Pytest test cases'

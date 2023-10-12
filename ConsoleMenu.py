@@ -5,11 +5,13 @@ import ProfileManager
 
 if __name__ == '__main__':
     userInput = ''
+    TwitchConnect.channelname = input("Input the Twitch channel you'd like to connect to: ")
+    os.system('cls')
     t1 = threading.Thread(target=TwitchConnect.twitch)
     #t2 = TwitchConnect.twitch()
 
     while userInput != 'exit':
-        print("Twitch Plays Chatbot v2")
+        print("Twitch Plays Chatbot v2 - " + TwitchConnect.channelname)
         if ProfileManager.profile != '':
             print("Currently loaded profile: " + ProfileManager.profile)
         else:
