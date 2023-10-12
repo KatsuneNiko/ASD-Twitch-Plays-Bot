@@ -9,7 +9,7 @@ import ProfileManager as ProfileManager
 #takes the user message as a parameter.
 def KeyboardInputs(message):
     testMessage = message.lower()
-    with open("profiles/" + ProfileManager.profile + ".txt") as f:
+    with open("backend/profiles/" + ProfileManager.profile + ".txt") as f:
         for l_no, lines in enumerate(f):
             if testMessage in lines:
                 singleLine = lines

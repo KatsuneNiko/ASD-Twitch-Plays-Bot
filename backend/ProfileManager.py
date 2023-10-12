@@ -21,7 +21,7 @@ def selectProfile():
 
 def createProfile(name):
     global profile
-    open("profiles/" + name + ".txt", 'x')
+    open("backend/profiles/" + name + ".txt", 'x')
     print("Profile " + name + " has been created")
     profile = name
 
@@ -38,15 +38,15 @@ def deleteProfile():
 
 def deleteProfile(name):
     global profile
-    os.remove("profiles/" + name + ".txt")
+    os.remove("backend/profiles/" + name + ".txt")
     print("Profile " + name + " has been deleted")
     profile = ''
 
 def viewProfile():
     global profile
     if profileExists(profile):
-        if os.path.getsize("profiles/" + profile + ".txt") > 0:
-            f = open("profiles/" + profile + ".txt", "r")
+        if os.path.getsize("backend/profiles/" + profile + ".txt") > 0:
+            f = open("backend/profiles/" + profile + ".txt", "r")
             print(f.read())
         else:
             print("No keybinds exist in current profile")
