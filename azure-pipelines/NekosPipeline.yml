@@ -34,11 +34,13 @@ steps:
     pip install pytest pytest-azurepipelines
     pip install coverage
     pytest
-    coverage run -m pytest
-    coverage xml -o coverage.xml
   displayName: 'Run Pytest test cases'
 
-- task: PublishCodeCoverageResults@2
-    inputs: 
-      summaryFileLocation: '/coverage.xml'
-  displayName: 'Display Coverage.py results'
+- script: |
+        coverage run -m pytest
+        coverage xml -o coverage.xml
+      displayName: Generate coverage report
+    - task: PublishCodeCoverageResults@2
+      inputs:
+        summaryFileLocation: '**/coverage.xml'
+  displayName: 'Run Coverage'
