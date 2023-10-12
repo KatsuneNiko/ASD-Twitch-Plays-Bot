@@ -1,7 +1,7 @@
 import os
 import threading
-import TwitchConnect
-import ProfileManager
+import TwitchConnect as TwitchConnect
+import ProfileManager as ProfileManager
 
 if __name__ == '__main__':
     userInput = ''

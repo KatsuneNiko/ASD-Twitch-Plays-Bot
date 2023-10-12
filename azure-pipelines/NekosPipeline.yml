@@ -25,10 +25,10 @@ steps:
     pip install pydirectinput
     pip install keyboard
     pip install -r requirements.txt
-    pip install ProfileManager
     npm install react-router-dom
     npm install --save styled-components
     npm install --save react-icons
+    npm install react-scripts --save
   displayName: 'Install dependencies'
 
 # - script: |
