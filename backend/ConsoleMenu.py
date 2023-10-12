@@ -27,6 +27,7 @@ if __name__ == '__main__':
         print("5 - View keybinds")
         print("6 - Add keybind")
         print("7 - Delete keybind")
+        print("8 - Change style of play")
         print("exit - Exit program")
         userInput = input("Input one of the above: ")
         os.system('cls')
@@ -74,6 +75,39 @@ if __name__ == '__main__':
             case '7':
                 ProfileManager.deleteKeybind()
                 input("Press any key to continue... ")
+            case '8':
+            ##KeyboardInputs.deleteKeybind()
+                userSOPInput = ''
+                while userSOPInput != 'success':
+                    print("Change the Style of Play")
+                    print("Press the following to trigger function")
+                    print("1 - Anarchy Mode")
+                    print("2 - Democratic Mode")
+                    print("cancel - cancel")
+                    userSOPInput = input("Input one of the following: ")
+                    os.system('cls')
+                    match userSOPInput:
+                        case '1':
+                            TwitchConnect.setStyleOfPlay('anarchy', 0)
+                            print("Success! Style of Play is now set to Anarchy")
+                            print(TwitchConnect.styleOfPlay)
+                            input("Press any key to continue...")
+                            userSOPInput = 'success'
+                        case '2':
+                            print("You have selected Democratic Mode, select the voting duration (in seconds) inbetween every command")
+                            userSecondsInput = input("Please select a number between 1-30: ")
+                            if userSecondsInput.isnumeric():
+                                TwitchConnect.setStyleOfPlay('democratic', userSecondsInput)
+                                print("Success! Style of Play is now set to Democratic")
+                                print(TwitchConnect.styleOfPlay)
+                                userSOPInput = 'success'
+                                input("Press any key to continue...")
+                            else:
+                                print("Error, returning to main menu") 
+                                input("Press any key to continue...")
+                                userSOPInput = 'success'
+                        case 'cancel':
+                            userSOPInput = 'success'
 
             case 'exit':
                 TwitchConnect.exitEvent.set()
