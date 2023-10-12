@@ -16,14 +16,15 @@ strategy:
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+    versionSpec: '3.x'  # or specify a specific version like '3.8'
+    addToPath: true
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r requirements.txt
+    pip install -r requirements.txt  # if you have a requirements file
+    pip install pytest
   displayName: 'Install dependencies'
 
 - script: |
-    pytest ./test_MouseInputs.py  
+    pytest ./test_MouseInputs.py  # specify the path to your test file or directory
   displayName: 'Run pytest'
