@@ -9,4 +9,4 @@ def test_profileExists():
 
 def test_deleteProfile():
     ProfileManager.deleteProfile("TestProfile")
-    assert ProfileManager.profile == '' and not ProfileManager.profileExists("test")
+    assert ProfileManager.profile == '' and not ProfileManager.profileExists("TestProfile")
