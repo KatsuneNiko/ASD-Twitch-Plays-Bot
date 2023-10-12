@@ -39,9 +39,9 @@ steps:
 - script: |
         coverage run -m pytest
         coverage xml -o coverage.xml
-      displayName: Generate coverage report
-      
-- task: PublishCodeCoverageResults@2
-    inputs:
-    summaryFileLocation: '**/coverage.xml'
   displayName: 'Run Coverage'
+
+- task: PublishCodeCoverageResults@2
+  inputs:
+    summaryFileLocation: '**/coverage.xml'
+  displayName: 'Generate coverage report'
