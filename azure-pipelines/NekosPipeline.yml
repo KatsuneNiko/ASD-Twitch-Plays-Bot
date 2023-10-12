@@ -32,6 +32,7 @@ steps:
 
 - script: |
     pip install pytest pytest-azurepipelines
+    pip install coverage
     pytest
     coverage run -m pytest
   displayName: 'Run Pytest test cases'
