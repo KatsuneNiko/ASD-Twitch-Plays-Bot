@@ -64,7 +64,7 @@ def twitch():
                     continue
                 print(user.title() + " : " + message)
                 #Call the keyboard input functions
-                MouseInputs.MouseInputs(message)
+                MouseInputs.MouseInputs(message,send_func=sendMessage)
                 if styleOfPlay == 'anarchy':
                     KeyboardInputs.KeyboardInputs(message)
                 elif styleOfPlay == 'democratic':
