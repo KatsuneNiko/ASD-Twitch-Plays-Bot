@@ -35,6 +35,7 @@ steps:
     pip install coverage
     pytest
     coverage run -m pytest
+    coverage xml -o coverage.xml
   displayName: 'Run Pytest test cases'
 
 - task: PublishCodeCoverageResults@2
