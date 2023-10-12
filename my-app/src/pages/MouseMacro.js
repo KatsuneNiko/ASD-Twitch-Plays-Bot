@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useState } from 'react';
 
 function MouseMacro() {
@@ -65,45 +64,50 @@ function MouseMacro() {
     };
   
     return (
-      <div>
-        <h1>CRUD Mouse</h1>
-        <button onClick={handleCreateTextFile}>Create Text File</button>
-        <button onClick={handleLoadAllowedCommands}>Load Allowed Commands</button>
-        <div>
-          <select value={selectedCommand} onChange={(e) => setSelectedCommand(e.target.value)}>
-            {possibleCommands.map((command) => (
-              <option key={command} value={command}>
-                {command}
-              </option>
-            ))}
-          </select>
-          {selectedCommand !== 'click_coordinates' && (
-            <input
-              type="text"
-              placeholder="Value"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-          )}
-          {selectedCommand === 'click_coordinates' && (
-            <>
-              <input
-                type="text"
-                placeholder="X Value"
-                value={xValue}
-                onChange={(e) => setXValue(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Y Value"
-                value={yValue}
-                onChange={(e) => setYValue(e.target.value)}
-              />
-            </>
-          )}
-          <button onClick={handleAddAllowedCommand}>Add Allowed Command</button>
+        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+            <h1 style={{ textAlign: 'center' }}>CRUD Mouse</h1>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                <button onClick={handleCreateTextFile} style={{ marginRight: '10px' }}>Create Text File</button>
+                <button onClick={handleLoadAllowedCommands}>Load Allowed Commands</button>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <select value={selectedCommand} onChange={(e) => setSelectedCommand(e.target.value)} style={{ marginBottom: '10px' }}>
+                    {possibleCommands.map((command) => (
+                        <option key={command} value={command}>
+                            {command}
+                        </option>
+                    ))}
+                </select>
+                {selectedCommand !== 'click_coordinates' && (
+                    <input
+                        type="text"
+                        placeholder="Value"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                        style={{ marginBottom: '10px' }}
+                    />
+                )}
+                {selectedCommand === 'click_coordinates' && (
+                    <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}>
+                        <input
+                            type="text"
+                            placeholder="X Value"
+                            value={xValue}
+                            onChange={(e) => setXValue(e.target.value)}
+                            style={{ marginRight: '10px' }}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Y Value"
+                            value={yValue}
+                            onChange={(e) => setYValue(e.target.value)}
+                        />
+                    </div>
+                )}
+                <button onClick={handleAddAllowedCommand}>Add Allowed Command</button>
+            </div>
         </div>
-      </div>
     );
-  };
+};
+
 export default MouseMacro;
