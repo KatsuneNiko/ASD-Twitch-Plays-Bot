@@ -10,5 +10,11 @@ def create_text_file_endpoint():
     create_text_file()
     return jsonify({"message": "Text file created successfully!"})
 
+@app.route('/load-allowed-commands', methods=['POST'])
+def load_allowed_commands_endpoint():
+    commands = load_allowed_commands()
+    return jsonify({"commands": commands})
+
+
 if __name__ == '__main__':
     app.run(port=5000)
