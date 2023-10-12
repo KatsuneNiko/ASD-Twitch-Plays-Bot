@@ -1,0 +1,2 @@
+Press,nil,x,x
+move_up,move_up100,100,nil

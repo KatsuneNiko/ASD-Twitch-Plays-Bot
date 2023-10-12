@@ -4,6 +4,78 @@ import pyautogui
 import re
 import os
 import MouseInputs
+import ProfileManager
+
+def MouseInputCommands(message):
+    testMessage = message.lower()
+    profile_path = "backend/profiles/" + ProfileManager.profile + ".txt"
+    
+    with open(profile_path) as f:
+        for lines in f:
+            singleLine = lines.split(",")
+            singleLine = lines.split(",")
+            inputType = str(singleLine[0]).lower()
+            keyword = str(singleLine[1]).lower()
+            arg1 = str(singleLine[2]).lower()
+            arg2 = str(singleLine[3]).lower()[:-1] if len(singleLine) > 3 else None  # Assuming there might be a second argument
+            
+            if testMessage == keyword:
+                match inputType:
+                    case 'move_up':
+                        moveMouse(0, -int(arg1))
+                    case 'move_down':
+                        moveMouse(0, int(arg1))
+                    case 'move_left':
+                        moveMouse(-int(arg1), 0)
+                    case 'move_right':
+                        moveMouse(int(arg1), 0)
+                    case 'click_left':
+                        clickMouse('left')
+                    case 'click_right':
+                        clickMouse('right')
+                    case 'scroll_up':
+                        scrollMouse(1)
+                    case 'scroll_down':
+                        scrollMouse(-1)
+                    case 'draw_circle':
+                        draw_circle(int(arg1))
+                    case 'click_coordinates':
+                        if arg1 and arg2:
+                            click_coordinates(int(arg1), int(arg2))
+                        else:
+                            print("Invalid coordinates")
+                    case 'show_commands':
+                        show_valid_commands(print)  # Assuming you want to print the commands
+
+def addMouseKeybind():
+    os.system('cls')
+    
+    # Choose the mouse action
+    mouseAction = ""
+    valid_actions = ["move_up", "move_down", "move_left", "move_right", "click_left", "click_right", "scroll_up", "scroll_down", "draw_circle", "click_coordinates"]
+    while mouseAction.lower() not in valid_actions:
+        mouseAction = input("Choose mouse action (e.g. move_up, click_left): ")
+        if mouseAction.lower() not in valid_actions:
+            os.system('cls')
+            print(f"Invalid action, \"{mouseAction}\" is not a valid action, please try again. ")
+            input("Press any key to continue... ")
+        else:
+            break
+
+    arg1 = None
+    arg2 = None
+    if mouseAction in ["move_up", "move_down", "move_left", "move_right", "draw_circle"]:
+        arg1 = input("Enter the amount (e.g. 100 for move, radius for circle): ")
+    elif mouseAction == "click_coordinates":
+        arg1 = input("Enter the x-coordinate: ")
+        arg2 = input("Enter the y-coordinate: ")
+
+    # Write to the profile file
+    file1 = open("backend/profiles/" + ProfileManager.profile + ".txt", "a")
+    newLine = f"{mouseAction},{arg1 or 'nil'},{arg2 or 'nil'}"
+    file1.write(str(newLine)+'\n')
+    file1.close()
+
 
 # Create text file with allowed commands
 def create_text_file():
@@ -121,3 +193,4 @@ def click_coordinates(x, y):
 def add_allowed_command(command):
     with open('MouseCommands.txt', 'a') as f:
         f.write(command + '\n')
+

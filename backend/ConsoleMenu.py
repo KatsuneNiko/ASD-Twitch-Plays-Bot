@@ -28,6 +28,7 @@ if __name__ == '__main__':
         print("6 - Add keybind")
         print("7 - Delete keybind")
         print("8 - Change style of play")
+        print("9 - Add mouse keybind")
         print("exit - Exit program")
         userInput = input("Input one of the above: ")
         os.system('cls')
@@ -108,7 +109,9 @@ if __name__ == '__main__':
                                 userSOPInput = 'success'
                         case 'cancel':
                             userSOPInput = 'success'
-
+            case '9':
+                ProfileManager.addMousebind()
+                input("Press any key to continue... ")
             case 'exit':
                 TwitchConnect.exitEvent.set()
                 pass

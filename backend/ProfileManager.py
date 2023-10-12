@@ -1,5 +1,6 @@
 import os
 import KeyboardInputs as KeyboardInputs
+import MouseInputs as MouseInputs
 
 profile = ''
 
@@ -50,6 +51,14 @@ def viewProfile():
             print(f.read())
         else:
             print("No keybinds exist in current profile")
+    else:
+        print("Unable to find current profile")
+
+def addMousebind():
+    global profile
+    if profileExists(profile):
+        MouseInputs.addMouseKeybind()
+        print("Success!")
     else:
         print("Unable to find current profile")
 
