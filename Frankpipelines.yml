@@ -25,10 +25,6 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    python -m unittest test_MouseInputs.py
-    displayName: 'Run tests'
-
-# - script: |
-#     pip install pytest pytest-azurepipelines
-#     pytest
-#   displayName: 'pytest'
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: 'pytest'
