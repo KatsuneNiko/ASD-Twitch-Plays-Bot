@@ -24,6 +24,10 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
+- script: |
+    python -m unittest test_MouseInputs.py
+    displayName: 'Run tests'
+
 # - script: |
 #     pip install pytest pytest-azurepipelines
 #     pytest
