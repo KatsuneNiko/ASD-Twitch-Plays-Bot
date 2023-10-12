@@ -40,7 +40,7 @@ steps:
         coverage run -m pytest
         coverage xml -o coverage.xml
       displayName: Generate coverage report
-    - task: PublishCodeCoverageResults@2
-      inputs:
-        summaryFileLocation: '**/coverage.xml'
+- task: PublishCodeCoverageResults@2
+    inputs:
+      summaryFileLocation: '**/coverage.xml'
   displayName: 'Run Coverage'
