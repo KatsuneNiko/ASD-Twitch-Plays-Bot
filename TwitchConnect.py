@@ -7,9 +7,11 @@ import MouseInputs
 ##Global variables
 global user
 global message
-global channel
+global channelname
+global CHANNEL
+global irc
 
-channel = ''
+channelname = ''
 
 ##Server and port information
 SERVER = "irc.twitch.tv"
@@ -25,7 +27,7 @@ def twitch():
     ##tokens can be found here... https://twitchapps.com/tmi/
     PASS = "oauth:acg413d5tln1omi9omb72lbkgje0e1"
     NICK = "CCG_Bot".lower()
-    CHANNEL = channel.lower()
+    CHANNEL = channelname.lower()
 
     ##Initialize socket and connect to Twitch IRC server
     irc = socket.socket()
@@ -66,9 +68,7 @@ def twitch():
             True
 
 def joinchat():
-    """
-    Joins the Twitch chat.
-    """
+    ##Joins Twitch chat
     Loading = True
     while Loading:
         readbuffer_join = irc.recv(1024).decode()
