@@ -36,3 +36,8 @@ steps:
     pytest
     coverage run -m pytest
   displayName: 'Run Pytest test cases'
+
+- task: PublishCodeCoverageResults@2
+      inputs:
+        summaryFileLocation: '**/coverage.xml'
+  displayName: 'Display Coverage.py results'
