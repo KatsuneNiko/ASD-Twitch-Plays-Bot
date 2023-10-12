@@ -1,6 +1,9 @@
 import socket
 import threading
 import time
+import sys
+import os
+sys.path.insert(0, os.getcwd()+"/backend")    
 import KeyboardInputs
 import MouseInputs
 import datetime
@@ -135,6 +138,9 @@ def setStyleOfPlay(inputSOP, userSecondsInput):
 
 def most_frequent(List):
     return max(set(List), key = List.count)
+
+def getStyleOfPlay():
+    return styleOfPlay
 ##Start the Twitch bot
 ##t1 = threading.Thread(target=twitch)
 ##t1.start()
