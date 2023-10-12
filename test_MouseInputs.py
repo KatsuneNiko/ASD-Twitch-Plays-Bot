@@ -1,5 +1,7 @@
+import sys
 import pytest
 from unittest.mock import patch, mock_open, MagicMock
+sys.modules['pyautogui'] = MagicMock()
 import MouseInputs
 
 @pytest.fixture
