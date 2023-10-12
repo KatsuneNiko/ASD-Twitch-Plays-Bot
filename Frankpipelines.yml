@@ -25,11 +25,7 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
+    pip install pytest pytest-azurepipelines
     export DISPLAY=:0
     pytest ./test_MouseInputs.py
   displayName: 'Run pytest'
-
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'Run Pytest test cases'
