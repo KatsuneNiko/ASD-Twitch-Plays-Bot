@@ -12,7 +12,7 @@ pr:
 - NekosBranch
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-2019
 strategy:
   matrix:
     Python311:
