@@ -40,5 +40,5 @@ steps:
 
 - task: PublishCodeCoverageResults@2
     inputs:
-        summaryFileLocation: '/coverage.xml'
+      summaryFileLocation: '/coverage.xml'
   displayName: 'Display Coverage.py results'
