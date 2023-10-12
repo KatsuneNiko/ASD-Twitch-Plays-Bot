@@ -59,7 +59,7 @@ export const Home = () => {
     <div className="home">
       <h1>ASD-Twitch-Plays-Bot is{twitchActive ? ' ' : ' not '}active!</h1>
       <button onClick={handleClick}>
-        button
+        Start/stop program
       </button>
     </div>
   );
