@@ -19,6 +19,10 @@ def selectProfile():
         else:
             print("Profile was not created")
 
+def selectProfile(name):
+    global profile
+    profile = name
+
 def createProfile(name):
     global profile
     open("backend/profiles/" + name + ".txt", 'x')
@@ -52,6 +56,9 @@ def viewProfile():
             print("No keybinds exist in current profile")
     else:
         print("Unable to find current profile")
+
+def listProfiles():
+    return list(map(lambda x: x.split('.')[0], os.listdir("backend/profiles/")))
 
 def addKeybind():
     global profile
