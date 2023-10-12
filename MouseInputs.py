@@ -3,7 +3,6 @@ import time
 import pyautogui
 import re
 import os
-import MouseInputs
 
 # Create text file with allowed commands
 def create_text_file():
