@@ -40,7 +40,9 @@ steps:
         coverage run -m pytest
         coverage xml -o coverage.xml
       displayName: Generate coverage report
-- task: PublishCodeCoverageResults@2
+- task: PublishCodeCoverageResults@1
+    displayName: Publish code coverage
+    condition: always()
     inputs:
-      summaryFileLocation: '**/coverage.xml'
-  displayName: 'Run Coverage'
+      codeCoverageTool: Cobertura
+      summaryFileLocation: $(Build.SourcesDirectory)\coverage.xml
