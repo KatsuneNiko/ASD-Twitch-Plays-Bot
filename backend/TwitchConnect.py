@@ -1,6 +1,9 @@
 import socket
 import threading
 import time
+import sys
+import os
+sys.path.insert(0, os.getcwd()+"/backend")    
 import KeyboardInputs
 import MouseInputs
 import datetime

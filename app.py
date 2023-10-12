@@ -1,5 +1,6 @@
 from flask import Flask 
-##from backend import TwitchConnect
+from backend import TwitchConnect
+from backend import ConsoleMenu
 
 app = Flask(__name__) 
 
@@ -11,7 +12,7 @@ def hello():
 @app.route("/StyleOfPlay") 
 def StyleOfPlay(): 
 	return {
-		"getSOP": "anarchy"
+		"getSOP": TwitchConnect.styleOfPlay
     }
 	
 @app.route("/") 
