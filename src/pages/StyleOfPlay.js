@@ -38,7 +38,7 @@ const StyleOfPlay = () =>  {
             <h1>Style of Play</h1>
             <text>Style of play is currently set to: {SOP.getSOP} </text> <br />
             <text>Press the button below to switch between democracy and anarchy mode... </text> <br /> <br />
-            <button action="/StyleOfPlay/Update" onSubmit={handleSubmit}>Press to switch</button>
+            <button action="" onSubmit={handleSubmit}>Press to switch</button>
         </div>
     );
 }
