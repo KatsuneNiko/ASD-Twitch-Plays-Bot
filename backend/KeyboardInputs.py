@@ -17,7 +17,8 @@ def KeyboardInputs(message):
                 inputType = str(singleLine[0]).lower()
                 duration = str(singleLine[1]).lower()
                 keyword = str(singleLine[2]).lower()
-                keybind = str(singleLine[3]).lower()[:-1]
+                if len(singleLine) > 3:
+                    keybind = str(singleLine[3]).lower()[:-1]
                 if(inputType) == "press":
                     pressKeyNew(keybind)
                 elif(inputType.lower()) == "hold":
