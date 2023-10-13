@@ -5,7 +5,6 @@
 
 trigger:
 - main
-- ZipianBranch
 
 pool:
   vmImage: ubuntu-latest
@@ -29,9 +28,14 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     pip install -r requirements.txt
+    npm install react-router-dom
+    npm install --save styled-components
+    npm install --save react-icons
+    npm install react-scripts --save
   displayName: 'Install dependencies'
 
 - script: |
     pip install pytest pytest-azurepipelines
-    pytest
+    pytest ./test_my-app.py
   displayName: 'pytest'
+
