@@ -7,7 +7,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const users = [
-  { username: "abirS", password: "21" },
+  { username: "root", password: "asd2023" },
 ];
 
 app.post('/login', (req, res) => {

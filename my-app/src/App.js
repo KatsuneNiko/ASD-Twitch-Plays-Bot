@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Login } from "./Login";
-import { Register } from "./Register";
+import { Discord } from "./Discord";
 import { useState } from 'react';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App"> 
     {
-      currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm} />
+      currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Discord onFormSwitch={toggleForm} />
     }
      
 

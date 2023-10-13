@@ -17,7 +17,7 @@ export const Login = (props) => {
       axios.post(`http://localhost:3521/login`, { username, password })
       .then(response => {
         console.log("Response from server:", response);
-        setSuccess("LET'S GO!");
+        setSuccess("Login Accepted, transfering to the home page");
         setError("");
       })
         .catch(error => {
@@ -45,6 +45,7 @@ export const Login = (props) => {
         <input class="input" type="password" name="password" onChange={e => setPassword(e.target.value)}></input>
         </div>
         <button type="submit" class="button">Login</button>
+        <button type="button" class="button" onClick={() => props.onFormSwitch(`discord`)}>Invite Discord Bot!</button>
        </form>
        {error && <p className="error">{error}</p>}
        {success && <p className="success">{success}</p>}
