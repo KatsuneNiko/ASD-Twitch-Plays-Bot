@@ -1,0 +1,39 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+trigger:
+      - main
+
+pool:
+  vmImage: windows-latest
+strategy:
+  matrix:
+    Python311:
+      python.version: '3.11'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
+
+- script: |
+    python -m pip install --upgrade pip
+    python -m pip install --upgrade pip
+    pip install -r backend/requirements.txt
+    pip install pyautogui
+    pip install pydirectinput
+    pip install keyboard
+    pip install -r requirements.txt
+    npm install react-router-dom
+    npm install --save styled-components
+    npm install --save react-icons
+    npm install react-scripts --save
+  displayName: 'Install dependencies'
+
+- script: |
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: 'Run Pytest test cases'
