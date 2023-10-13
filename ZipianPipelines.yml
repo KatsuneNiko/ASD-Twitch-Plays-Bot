@@ -36,6 +36,6 @@ steps:
 
 - script: |
     pip install pytest pytest-azurepipelines
-    pytest ./test_my-app.py
+    pytest ./test_statistics.py
   displayName: 'pytest'
 
