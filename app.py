@@ -1,5 +1,7 @@
 from flask import Flask 
+from flask import jsonify 
 from flask import request
+from flask_cors import CORS
 from backend import TwitchConnect
 from backend import ConsoleMenu
 import json  
@@ -12,33 +14,42 @@ app = Flask(__name__)
 def hello(): 
     return "Hello, Welcome to GeeksForGeeks"
 
-@app.route("/StyleOfPlay") 
-def StyleOfPlay(): 
+@app.route("/StyleOfPlay", methods=['GET']) 
+def StyleOfPlay():
+	currentSOP = TwitchConnect.styleOfPlay
+	if request.method == 'POST':
+		print('post app')
+	if currentSOP == 'anarchy':
+		TwitchConnect.setStyleOfPlay('democratic', 5)
+	else:
+		TwitchConnect.setStyleOfPlay('anarchy', 5) 
 	return {
 		"getSOP": TwitchConnect.styleOfPlay,
-		"SOP": "anarchy",
-		"triggerSOP": TwitchConnect.setStyleOfPlay()
+		"SOP": "anarchy"
     }
 
-@app.route("/StyleOfPlay", methods=['GET', 'POST']) 
-def apiSetStyleOfPlay():
-	data = request.get_json()
-	testSOP = data['SOP']
-	if testSOP == 'anarchy':
-		TwitchConnect.setStyleOfPlay('anarchy', 5)
-	else:
+@app.route('/StyleOfPlay', methods=['POST'])
+def postStyleOfPlay():
+	currentSOP = TwitchConnect.styleOfPlay
+	if request.method == 'POST':
+		print('post app')
+	if currentSOP == 'anarchy':
 		TwitchConnect.setStyleOfPlay('democratic', 5)
-	return json.dumps({"result":"success"}) 
+	else:
+		TwitchConnect.setStyleOfPlay('anarchy', 5)
+	return {
+		"getSOP": TwitchConnect.styleOfPlay,
+		"SOP": "anarchy"}
+	
         
 @app.route("/CRUDKeyboard") 
-def StyleOfPlay(): 
+def test(): 
 	return {
 		"getSOP": TwitchConnect.styleOfPlay,
 		"SOP": "anarchy",
-		"triggerSOP": TwitchConnect.setStyleOfPlay()
     }
 	
-@app.route("/") 
+@app.route("/ignore") 
 def index(): 
 	return "Homepage of GeeksForGeeks"
 
