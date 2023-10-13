@@ -20,7 +20,7 @@ function MouseMacro() {
       'click_coordinates',
       'show_commands'
     ];
-  
+    
     const handleCreateTextFile = async () => {
       try {
         const response = await fetch('http://localhost:5000/create-text-file', {
@@ -108,6 +108,7 @@ function MouseMacro() {
             </div>
         </div>
     );
+    
 };
 
 export default MouseMacro;

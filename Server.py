@@ -15,6 +15,11 @@ def load_allowed_commands_endpoint():
     commands = load_allowed_commands()
     return jsonify({"commands": commands})
 
+@app.route('/add_allowed_command/<command>', methods=['POST'])
+def add_allowed_command_endpoint(command):
+    add_allowed_command(command)
+    return jsonify({"message": f"Command '{command}' added successfully!"})
+
 
 if __name__ == '__main__':
     app.run(port=5000)
