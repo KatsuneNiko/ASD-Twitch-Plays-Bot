@@ -31,15 +31,8 @@ steps:
     npm install react-scripts --save
   displayName: 'Install dependencies'
 
-<<<<<<<< HEAD:Frankpipelines.yml
 - script: |
     pip install pytest pytest-azurepipelines
     export DISPLAY=:0
     pytest ./test_MouseInputs.py
   displayName: 'Run pytest'
-========
-# - script: |
-#     pip install pytest pytest-azurepipelines
-#     pytest
-#   displayName: 'pytest'
->>>>>>>> 91b85cafa15e4abb6a16b7b1db231fad7ff0897a:azure-pipelines/NekosPipeline.yml
