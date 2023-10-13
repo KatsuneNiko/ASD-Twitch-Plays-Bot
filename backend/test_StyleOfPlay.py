@@ -1,5 +1,4 @@
 import TwitchConnect
-import pytest
 from random import randint
 
 def test_getCurrentStyle():

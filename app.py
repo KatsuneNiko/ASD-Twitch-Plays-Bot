@@ -1,7 +1,14 @@
 from flask import Flask 
+from flask import jsonify 
 from flask import request
+<<<<<<< HEAD
 from backend import TwitchConnect, ProfileManager
 import threading
+=======
+from flask_cors import CORS
+from backend import TwitchConnect
+from backend import ConsoleMenu
+>>>>>>> 22d43e4a33ca008fc055f078e72661763954ad6a
 import json  
 
 app = Flask(__name__)
@@ -12,6 +19,7 @@ t1 = threading.Thread(target=TwitchConnect.twitch, daemon=True)
 def hello(): 
 	return "Hello, Welcome to GeeksForGeeks"
 
+<<<<<<< HEAD
 @app.route("/TwitchConnect", methods=['GET', 'POST'])
 def apiTwitchConnect():
 	if request.method == 'POST':
@@ -39,19 +47,52 @@ def apiProfile():
 		"currentProfile": ProfileManager.profile,
 		"profileNames": ProfileManager.listProfiles(),
 	}
-
-@app.route("/StyleOfPlay", methods=['GET', 'POST']) 
-def apiSetStyleOfPlay():
-	data = request.get_json()
-	testSOP = data['SOP']
-	if testSOP == 'anarchy':
-		TwitchConnect.setStyleOfPlay('anarchy', 5)
-	else:
+=======
+@app.route("/StyleOfPlay", methods=['GET']) 
+def StyleOfPlay():
+	currentSOP = TwitchConnect.styleOfPlay
+	if request.method == 'POST':
+		print('post app')
+	if currentSOP == 'anarchy':
 		TwitchConnect.setStyleOfPlay('democratic', 5)
+	else:
+		TwitchConnect.setStyleOfPlay('anarchy', 5) 
+	return {
+		"getSOP": TwitchConnect.styleOfPlay,
+		"SOP": "anarchy"
+    }
+>>>>>>> 22d43e4a33ca008fc055f078e72661763954ad6a
+
+@app.route('/StyleOfPlay', methods=['POST'])
+def postStyleOfPlay():
+	currentSOP = TwitchConnect.styleOfPlay
+	if request.method == 'POST':
+		print('post app')
+	if currentSOP == 'anarchy':
+		TwitchConnect.setStyleOfPlay('democratic', 5)
+<<<<<<< HEAD
 	return json.dumps({"result":"success"}) 
 	
 @app.route("/") 
 def index():
+=======
+	else:
+		TwitchConnect.setStyleOfPlay('anarchy', 5)
+	return {
+		"getSOP": TwitchConnect.styleOfPlay,
+		"SOP": "anarchy"}
+	
+        
+@app.route("/CRUDKeyboard") 
+def test(): 
+	return {
+		"getSOP": TwitchConnect.styleOfPlay,
+		"SOP": "anarchy",
+    }
+	
+@app.route("/ignore") 
+def index(): 
+>>>>>>> 22d43e4a33ca008fc055f078e72661763954ad6a
 	return "Homepage of GeeksForGeeks"
 
 if __name__ == "__main__":
