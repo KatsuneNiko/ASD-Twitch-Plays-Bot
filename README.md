@@ -7,7 +7,7 @@ Backend
 	3. Keyboard inputs based on user created keywords (CRUD) (David)
 	4. Changing the Style of Play to one of three modes (David)
 	5. Login/add users (Abir)
-	6. Connect application/chatbot to Discord chat API (Abir)
+	6. Twitch Notification Discord Bot (Abir)
 	7. Statistics (Zipian)
 	8. Split Mode (Zipian)
 	9. Mouse inputs based on user created keywords (CRUD) (Frank)
