@@ -10,3 +10,4 @@ draw_circle
 time
 click_coordinates
 show_commands
+200
