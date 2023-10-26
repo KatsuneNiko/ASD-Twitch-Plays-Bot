@@ -18,10 +18,11 @@ def KeyboardInputs(message):
                 duration = str(singleLine[1]).lower()
                 keyword = str(singleLine[2]).lower()
                 keybind = str(singleLine[3]).lower()[:-1]
-                if(inputType) == "press":
-                    pressKeyNew(keybind)
-                elif(inputType.lower()) == "hold":
-                    holdKey(keybind, duration)    
+                if(testMessage==keyword):
+                    if(inputType) == "press":
+                        pressKeyNew(keybind)
+                    elif(inputType.lower()) == "hold":
+                        holdKey(keybind, duration)    
 
     '''
     #hardcode keywords to keyboard inputs
@@ -98,16 +99,17 @@ def pressKeyNew(key):
 def holdKey(key, seconds):
     currentTime = time.time()
     trackTime = currentTime
-    futureTime = currentTime + seconds
+    futureTime = currentTime + float(seconds)
     print(currentTime)
     while trackTime<=futureTime:
         trackTime = time.time()
-        keyboard.press(key)
-        keyboard.release(key)
+        pydirectinput.press(key)
+    pydirectinput.keyUp(key)
 
+        
 def typeMessage(inputMessage):
     for x in inputMessage:
-        keyboard.press(x)
+        keyboard.press(x,3)
 
 def somethingWasPressed():
     return wasSomethingPressed

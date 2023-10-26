@@ -9,7 +9,7 @@ import TwitchConnect
 import KeyboardInputs
 import datetime
 
-accessToken = 'MTE2MjM0NTkyNDc5ODk4ODI5OA.G1WsiF.Wil8TAu7C1JpKcaG74CzraASDq_gsFHCz13mYk'
+accessToken = 'MTE2MjM0NTkyNDc5ODk4ODI5OA.GcWWz4.WcMk2lNI29zoAp3OU1fcRCNYAM93fwfOm2I1KE'
 nickname = 'CCGchatbot'
 channelJoin = "Mew's Palace"
 
@@ -45,7 +45,7 @@ async def on_message(message):
             if democraticStarted == False:
                 myList.clear()
                 democraticStarted = True
-                endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                endTime = datetime.datetime.now() + datetime.timedelta(seconds=3)
                 myList.append(message_content)
             elif democraticStarted == True:
                 if datetime.datetime.now() >= endTime:
@@ -54,7 +54,7 @@ async def on_message(message):
                     KeyboardInputs.KeyboardInputs(mostCommon)
                     myList.clear()
                     myList.append(message_content)
-                    endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                    endTime = datetime.datetime.now() + datetime.timedelta(seconds=3)
                 else:
                     myList.append(message_content)
 
