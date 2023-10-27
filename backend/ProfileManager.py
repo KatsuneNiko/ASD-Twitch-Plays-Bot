@@ -6,7 +6,7 @@ profile = ''
 def profileExists(name):
     return os.path.exists("backend/profiles/" + name + ".txt")
 
-def selectProfile():
+def selectProfileGUI():
     global profile
     tempProfile = input("Input the profile you'd like to use (case sensitive): ")
     if profileExists(tempProfile):
@@ -29,7 +29,7 @@ def createProfile(name):
     print("Profile " + name + " has been created")
     profile = name
 
-def deleteProfile():
+def deleteProfileGUI():
     global profile
     if profileExists(profile):
         deleteConfirmation = input("Are you sure you would like to delete profile " + profile + "? (yes/no) ")

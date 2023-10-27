@@ -35,11 +35,11 @@ if __name__ == '__main__':
         os.system('cls')
         match userInput:
             case '1':
-                ProfileManager.selectProfile()
+                ProfileManager.selectProfileGUI()
                 input("Press any key to continue... ")
 
             case '2':
-                ProfileManager.deleteProfile()
+                ProfileManager.deleteProfileGUI()
                 input("Press any key to continue... ")
 
             case '3':
