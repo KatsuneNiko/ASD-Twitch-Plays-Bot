@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 
 const SelectProfile = () =>  {
     const [profileNames, setProfileNames] = useState([]);
@@ -76,7 +75,7 @@ const SelectProfile = () =>  {
                                 {profileName}
                             </td>
                             <td>
-                                <button onClick={() => deleteProfile(profileName)}>
+                                <button onClick={() => setProfile(profileName)}>
                                     Select
                                 </button>
                                 <button onClick={() => deleteProfile(profileName)}>
