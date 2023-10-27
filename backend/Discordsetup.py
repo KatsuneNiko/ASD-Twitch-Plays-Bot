@@ -4,7 +4,6 @@ import platform
 from twitchio.ext import commands
 import os
 import discord
-from dotenv import load_dotenv
 import TwitchConnect
 import KeyboardInputs
 import datetime
