@@ -8,7 +8,6 @@ import KeyboardInputs
 import MouseInputs
 import datetime
 
-
 ##Global variables
 global user
 global message
@@ -16,6 +15,7 @@ global channelname
 global CHANNEL
 global irc
 
+global styleOfPlay
 styleOfPlay = 'anarchy'
 votingTime = 10.0
 totalMessages = []
