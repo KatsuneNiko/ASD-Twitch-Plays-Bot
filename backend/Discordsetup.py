@@ -1,7 +1,6 @@
 import subprocess
 import os
 import platform
-from twitchio.ext import commands
 import os
 import discord
 import TwitchConnect

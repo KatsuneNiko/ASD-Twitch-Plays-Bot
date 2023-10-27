@@ -1,7 +1,7 @@
 import os
 import KeyboardInputs as KeyboardInputs
 
-profile = ''
+profile = 'WASD'
 
 def profileExists(name):
     return os.path.exists("backend/profiles/" + name + ".txt")
