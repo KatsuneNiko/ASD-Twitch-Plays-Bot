@@ -56,16 +56,15 @@ def StyleOfPlay():
 @app.route('/StyleOfPlay', methods=['POST'])
 def postStyleOfPlay():
 	currentSOP = TwitchConnect.styleOfPlay
-	if request.method == 'POST':
-		print('post app')
-	if currentSOP == 'anarchy':
-		TwitchConnect.setStyleOfPlay('democratic', 5)
-	else:
-		TwitchConnect.setStyleOfPlay('anarchy', 5)
+	body = request.get_json()
+	if body['trigger'] == 'true':
+		if currentSOP == 'anarchy':
+			TwitchConnect.setStyleOfPlay('democratic', 5)
+		else:
+			TwitchConnect.setStyleOfPlay('anarchy', None)
 	return {
 		"getSOP": TwitchConnect.styleOfPlay,
-		"SOP": "anarchy"}
-	
+		}
         
 @app.route("/CRUDKeyboard") 
 def test(): 
