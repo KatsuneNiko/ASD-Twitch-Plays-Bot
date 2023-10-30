@@ -2,13 +2,15 @@ import os
 import threading
 import TwitchConnect as TwitchConnect
 import ProfileManager as ProfileManager
+import DiscordSetup
 
 if __name__ == '__main__':
     userInput = ''
     TwitchConnect.channelname = input("Input the Twitch channel you'd like to connect to: ")
-    os.system('cls')
     t1 = threading.Thread(target=TwitchConnect.twitch)
-    #t2 = TwitchConnect.twitch()
+    t2 = threading.Thread(target=DiscordSetup.runDiscordBot)
+    t2.start()
+    os.system('cls')
 
     while userInput != 'exit':
         print("Twitch Plays Chatbot v2 - " + TwitchConnect.channelname)
@@ -34,11 +36,11 @@ if __name__ == '__main__':
         os.system('cls')
         match userInput:
             case '1':
-                ProfileManager.selectProfile()
+                ProfileManager.selectProfileGUI()
                 input("Press any key to continue... ")
 
             case '2':
-                ProfileManager.deleteProfile()
+                ProfileManager.deleteProfileGUI()
                 input("Press any key to continue... ")
 
             case '3':

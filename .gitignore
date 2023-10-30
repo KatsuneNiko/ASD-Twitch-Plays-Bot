@@ -13,6 +13,7 @@ node_modules
 # testing
 /coverage
 __pycache__/
+.venv/
 
 # production
 /build
@@ -27,4 +28,8 @@ __pycache__/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 >>>>>>> 91b85cafa15e4abb6a16b7b1db231fad7ff0897a
+=======
+
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18

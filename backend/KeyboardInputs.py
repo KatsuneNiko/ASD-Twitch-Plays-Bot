@@ -1,5 +1,3 @@
-import socket
-import threading
 import time
 import keyboard
 import pydirectinput
@@ -7,6 +5,8 @@ import os
 import ProfileManager
 
 #takes the user message as a parameter.
+wasSomethingPressed = False
+
 def KeyboardInputs(message):
     testMessage = message.lower()
     with open("backend/profiles/" + ProfileManager.profile + ".txt") as f:
@@ -17,12 +17,21 @@ def KeyboardInputs(message):
                 inputType = str(singleLine[0]).lower()
                 duration = str(singleLine[1]).lower()
                 keyword = str(singleLine[2]).lower()
+<<<<<<< HEAD
                 if len(singleLine) > 3:
                     keybind = str(singleLine[3]).lower()[:-1]
                 if(inputType) == "press":
                     pressKeyNew(keybind)
                 elif(inputType.lower()) == "hold":
                     holdKey(keybind, duration)    
+=======
+                keybind = str(singleLine[3]).lower()[:-1]
+                if(testMessage==keyword):
+                    if(inputType) == "press":
+                        pressKeyNew(keybind)
+                    elif(inputType.lower()) == "hold":
+                        holdKey(keybind, duration)    
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18
 
     '''
     #hardcode keywords to keyboard inputs
@@ -93,17 +102,23 @@ def deleteKeybind():
 
 def pressKeyNew(key):
     pydirectinput.press(key)
+    global wasSomethingPressed 
+    wasSomethingPressed = True
 
 def holdKey(key, seconds):
     currentTime = time.time()
     trackTime = currentTime
-    futureTime = currentTime + seconds
+    futureTime = currentTime + float(seconds)
     print(currentTime)
     while trackTime<=futureTime:
         trackTime = time.time()
-        keyboard.press(key)
-        keyboard.release(key)
+        pydirectinput.press(key)
+    pydirectinput.keyUp(key)
 
+        
 def typeMessage(inputMessage):
     for x in inputMessage:
-        keyboard.press(x)
+        keyboard.press(x,3)
+
+def somethingWasPressed():
+    return wasSomethingPressed

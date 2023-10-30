@@ -2,12 +2,12 @@ import os
 import KeyboardInputs as KeyboardInputs
 import MouseInputs as MouseInputs
 
-profile = ''
+profile = 'WASD'
 
 def profileExists(name):
     return os.path.exists("backend/profiles/" + name + ".txt")
 
-def selectProfile():
+def selectProfileGUI():
     global profile
     tempProfile = input("Input the profile you'd like to use (case sensitive): ")
     if profileExists(tempProfile):
@@ -20,13 +20,17 @@ def selectProfile():
         else:
             print("Profile was not created")
 
+def selectProfile(name):
+    global profile
+    profile = name
+
 def createProfile(name):
     global profile
     open("backend/profiles/" + name + ".txt", 'x')
     print("Profile " + name + " has been created")
     profile = name
 
-def deleteProfile():
+def deleteProfileGUI():
     global profile
     if profileExists(profile):
         deleteConfirmation = input("Are you sure you would like to delete profile " + profile + "? (yes/no) ")
@@ -54,6 +58,7 @@ def viewProfile():
     else:
         print("Unable to find current profile")
 
+<<<<<<< HEAD
 def addMousebind():
     global profile
     if profileExists(profile):
@@ -61,6 +66,10 @@ def addMousebind():
         print("Success!")
     else:
         print("Unable to find current profile")
+=======
+def listProfiles():
+    return list(map(lambda x: x.split('.')[0], os.listdir("backend/profiles/")))
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18
 
 def addKeybind():
     global profile

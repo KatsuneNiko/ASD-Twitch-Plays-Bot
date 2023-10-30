@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*.App {
+=======
+.App {
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18
   text-align: center;
   display: flex;
   min-height: 100vh;
@@ -25,6 +29,15 @@
   -webkit-text-stroke-color: black;
 }
 
+<<<<<<< HEAD
+=======
+.success {
+  color: greenyellow;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+}
+
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18
 .login-form {
   text-align: center;
   color: greenyellow;
@@ -66,6 +79,7 @@
   background-color: rgba(255, 255, 255, .15);
   backdrop-filter: blur(5px);
   border: 2px solid white;
+<<<<<<< HEAD
 }*/
 
 * {
@@ -83,4 +97,6 @@
   display: flex;
   margin-left: 260px;
   font-size: 2rem;
+=======
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18
 }

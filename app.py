@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 from flask import Flask, jsonify
 from flask import request
 from backend import TwitchConnect, ProfileManager
 from flask_cors import CORS  # <-- Add this import
 from MouseInputs import *
+=======
+from flask import Flask 
+from flask import request
+from backend import TwitchConnect, ProfileManager
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18
 import threading
 
 app = Flask(__name__)
@@ -80,6 +86,7 @@ def test():
 def index(): 
 	return "Homepage of GeeksForGeeks"
 
+<<<<<<< HEAD
 @app.route('/create-text-file', methods=['POST'])
 def create_text_file_endpoint():
     create_text_file()
@@ -98,3 +105,8 @@ def add_allowed_command_endpoint(command):
 if __name__ == "__main__":
 	app.run(debug=True) 
 	app.run(port=3000)
+=======
+if __name__ == "__main__":
+	app.run(debug=True) 
+	app.run(port=3000)
+>>>>>>> c46874a2dce852b7500489dc6844aca991bfaf18

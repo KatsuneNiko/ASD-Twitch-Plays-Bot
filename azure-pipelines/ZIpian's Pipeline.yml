@@ -4,17 +4,20 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-  branches:
-    include:
-      - main
-      - Katherine-GUI-branch
+- main
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 strategy:
   matrix:
-    Python311:
-      python.version: '3.11'
+    Python27:
+      python.version: '2.7'
+    Python35:
+      python.version: '3.5'
+    Python36:
+      python.version: '3.6'
+    Python37:
+      python.version: '3.7'
 
 steps:
 - task: UsePythonVersion@0
@@ -24,10 +27,10 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r backend/requirements.txt
+    pip install -r requirements.txt
   displayName: 'Install dependencies'
 
 - script: |
     pip install pytest pytest-azurepipelines
     pytest
-  displayName: 'Run Pytest test cases'
+  displayName: 'pytest'
