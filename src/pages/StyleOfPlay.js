@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import "./style.css";
 
 const StyleOfPlay = () =>  {    
 
@@ -42,11 +43,11 @@ const StyleOfPlay = () =>  {
     }
 
     return (
-        <div>
+        <div >
             <h1>Style of Play</h1>
             <text>Style of play is currently set to: {SOP} </text> <br />
             <text>Press the button below to switch between democracy and anarchy mode... </text> <br /> <br />
-            <button action="" onClick={() => handleSubmit()}>Press to switch</button>
+            <button class="rectangle" action="" onClick={() => handleSubmit()}>Press to switch</button>
         </div>
     );
 }
