@@ -1,4 +1,3 @@
-import sys
 import os
 from flask import Flask, send_from_directory
 from flask import request
@@ -6,7 +5,7 @@ from backend import TwitchConnect, ProfileManager
 import threading
 
 app = Flask(__name__, static_folder=None)
-t1 = threading.Thread(target=TwitchConnect.twitch, daemon=True)
+t1: threading.Thread | None = None
 
 # Pass the required route to the decorator. 
 @app.route("/hello") 
@@ -15,14 +14,20 @@ def hello():
 
 @app.route("/TwitchConnect", methods=['GET', 'POST'])
 def apiTwitchConnect():
+	global t1
 	if request.method == 'POST':
 		body = request.get_json()
 		if body['active']:
+			if t1 is None:
+				t1 = threading.Thread(target=TwitchConnect.twitch, args=[body.get('channelName') if body.get('channelName') is not None else ''])
+			TwitchConnect.exitEvent.clear()
 			t1.start()
 		else:
-			TwitchConnect.pauseEvent.set()
+			TwitchConnect.exitEvent.set()
+			t1.join()
+			t1 = None
 	return {
-		"active": t1.is_alive()
+		"active": t1 is not None and t1.is_alive()
 	}
 
 @app.route("/ProfileManager", methods=['GET', 'POST'])
