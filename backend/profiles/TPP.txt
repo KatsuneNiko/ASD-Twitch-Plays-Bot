@@ -15,8 +15,6 @@ hold,0.5,fastforward,o
 hold,0.5,ff,o
 press,nil,pressb,z
 press,nil,bb,z
-press,nil,r-trigger,e
-press,nil,l-trigger,q
 press,nil,start,m
 press,nil,select,n
 

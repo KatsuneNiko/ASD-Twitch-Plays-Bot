@@ -9,7 +9,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
-    "react-native": "^0.72.5",
+    "react-native": "^0.72.6",
+    "react-native-web": "^0.19.9",
     "react-router-dom": "^6.16.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.0",
@@ -40,5 +41,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://127.0.0.1:5000/"
+  "proxy": "http://127.0.0.1:5000/",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
 }

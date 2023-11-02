@@ -113,3 +113,25 @@ def typeMessage(inputMessage):
 
 def somethingWasPressed():
     return wasSomethingPressed
+
+def apiAddKeybind(action, duration, keyword, keybind):
+    newAction = action
+    newDuration = duration
+    newKeyword = keyword
+    newKeybind = keybind
+    file1 = open("backend/profiles/" + ProfileManager.profile + ".txt", "a")
+    if action == 'hold':
+        newLine = newAction + "," + newDuration + "," + newKeyword + "," + newKeybind
+    else:
+        newLine = newAction + "," + "nil" + "," + newKeyword + "," + newKeybind 
+    file1.write(str(newLine)+'\n')
+    file1.close()
+
+def apiDeleteKeybind(deleteKeyword):
+    with open("backend/profiles/" + ProfileManager.profile + ".txt", "r+") as f:
+        d = f.readlines()
+        f.seek(0)
+        for i in d:
+            if deleteKeyword not in i:
+                f.write(i)
+        f.truncate()

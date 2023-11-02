@@ -1,6 +1,7 @@
 from flask import Flask 
 from flask import request
-from backend import TwitchConnect, ProfileManager
+from flask import redirect
+from backend import TwitchConnect, ProfileManager, KeyboardInputs
 import threading
 
 app = Flask(__name__)
@@ -66,12 +67,27 @@ def postStyleOfPlay():
 		"getSOP": TwitchConnect.styleOfPlay,
 		}
         
-@app.route("/CRUDKeyboard") 
-def test(): 
+@app.route("/CRUDKeyboard", methods=['GET']) 
+def CRUDKeyboard(): 
 	return {
-		"getSOP": TwitchConnect.styleOfPlay,
-		"SOP": "anarchy",
+		"txtArray": ProfileManager.viewProfileAPI(),
+		"profileName": ProfileManager.returnProfile(),
     }
+
+@app.route('/CRUDKeyboard', methods=['POST']) 
+def postCRUDKeyboard(): 
+	body = request.form
+	print(body)
+	if(body['formOneOrTwo'] == 'add'):
+		action = body['action']
+		duration = body['duration']
+		keyword = body['keyword']
+		keybind = body['keybind']
+		KeyboardInputs.apiAddKeybind(action, duration, keyword, keybind)
+	elif (body['formOneOrTwo'] == 'delete'):
+		keyword = body['deleteKeyword']
+		KeyboardInputs.apiDeleteKeybind(keyword)
+	return redirect("http://localhost:3000/CRUDKeyboard", code=302)
 	
 @app.route("/ignore") 
 def index(): 

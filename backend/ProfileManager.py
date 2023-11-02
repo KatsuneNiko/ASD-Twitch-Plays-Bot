@@ -75,3 +75,37 @@ def deleteKeybind():
         print("Success!")
     else:
         print("Unable to find current profile")
+
+def returnProfile():
+    global profile
+    temp = profile
+    return temp
+
+def listTxt():
+    #my_file = open("backend/profiles/" + profile + ".txt", "r")
+  
+    # reading the file 
+    #data = my_file.read() 
+    
+    # replacing end splitting the text  
+    # when newline ('\n') is seen. 
+    #data_into_list = data.split("\n") 
+    #print(data_into_list) 
+    #my_file.close() 
+
+    return list(map(lambda x: x.split('\n')[0], os.open("backend/profiles/" + profile + ".txt", "r")))
+
+def viewProfileAPI():
+    global profile
+    testsite_array = []
+    if profileExists(profile):
+        if os.path.getsize("backend/profiles/" + profile + ".txt") > 0:
+            with open("backend/profiles/" + profile + ".txt", "r") as my_file:
+                for line in my_file:
+                    testsite_array.append(line)
+            
+            return testsite_array
+        else:
+            print("No keybinds exist in current profile")
+    else:
+        print("Unable to find current profile")

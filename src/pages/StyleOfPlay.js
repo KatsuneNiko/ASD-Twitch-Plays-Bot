@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import "./style.css";
+import "./styleNeko.css";
 
 const StyleOfPlay = () =>  {    
 
@@ -21,21 +21,7 @@ const StyleOfPlay = () =>  {
                 trigger: 'true',
             }),
             headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const requestJson = await request.json();
-        setSOP(requestJson.getSOP); //one posted, api returns
-    }
-
-    const handleSubmit2 = async () => {
-        const request = await fetch('/StyleOfPlay', {
-            method: 'POST',
-            body: JSON.stringify({ 
-                helo: 'true',
-            }),
-            headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
         });
         const requestJson = await request.json();
@@ -43,9 +29,9 @@ const StyleOfPlay = () =>  {
     }
 
     return (
-        <div >
-            <h1>Style of Play</h1>
-            <text>Style of play is currently set to: {SOP} </text> <br />
+        <div class="vertical-align-content">
+            <h1>Style of Play</h1> <br />
+            <text>Style of play is currently set to: {SOP} </text> <br /> <br />
             <text>Press the button below to switch between democracy and anarchy mode... </text> <br /> <br />
             <button class="rectangle" action="" onClick={() => handleSubmit()}>Press to switch</button>
         </div>
