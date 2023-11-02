@@ -1,0 +1,4 @@
+press,nil,up,w
+press,nil,left,a
+press,nil,right,d
+press,nil,down,s

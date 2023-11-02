@@ -1,0 +1,4 @@
+press,nil,up,i
+press,nil,left,j
+press,nil,down,k
+press,nil,right,l
