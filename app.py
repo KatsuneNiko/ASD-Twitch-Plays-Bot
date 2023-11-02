@@ -3,7 +3,7 @@ from flask import request
 from backend import TwitchConnect, ProfileManager
 import threading
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
 t1 = threading.Thread(target=TwitchConnect.twitch, daemon=True)
 
 # Pass the required route to the decorator. 
