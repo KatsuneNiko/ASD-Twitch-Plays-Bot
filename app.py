@@ -83,10 +83,13 @@ def postCRUDKeyboard():
 		duration = body['duration']
 		keyword = body['keyword']
 		keybind = body['keybind']
-		KeyboardInputs.apiAddKeybind(action, duration, keyword, keybind)
+		currentProfile = ProfileManager.returnProfile()
+		KeyboardInputs.apiAddKeybind(action, duration, keyword, keybind, currentProfile)
 	elif (body['formOneOrTwo'] == 'delete'):
 		keyword = body['deleteKeyword']
-		KeyboardInputs.apiDeleteKeybind(keyword)
+		currentProfile = ProfileManager.returnProfile()
+		KeyboardInputs.apiDeleteKeybind(keyword, currentProfile)
+		print("At API, when delete, profile = ", ProfileManager.profile)
 	return redirect("http://localhost:3000/CRUDKeyboard", code=302)
 
 @app.route('/', defaults={'path': 'index.html'})

@@ -19,19 +19,6 @@ const CRUDKeyboard = () =>  {
           console.log("profileNamez: " + profileName);
       })()
   }, []);
-
-  const convertToJSON = (data) => {
-    return data.split('\n\n').map(entry => {
-      return JSON.parse(entry);
-    });
-  }
-
-  const txtArray = txtLines.toString().split(',');
-  const anotherArray = txtLines.toString().split('\n').join("\n\n")
-  //txtLines
-  //const txtFile = "backend/profiles/" + txtLines
-  //const txtList = txtFile.split("/")
-  //console.log("List " + txtList);
   
   const handleSubmit = async () => {
     const request = await fetch('/CRUDKeyboard', {
