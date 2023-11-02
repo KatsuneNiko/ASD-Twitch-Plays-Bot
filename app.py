@@ -87,5 +87,5 @@ def catch_all(path):
 if __name__ == "__main__":
 	if getattr(sys, 'frozen', False):
 		os.chdir(sys._MEIPASS)
-		print('Backend Folder: ' + sys._MEIPASSS)
+		print('Backend Folder: ' + sys._MEIPASS)
 	app.run(port=3000, debug=(os.getenv('ENV') != 'production'))
