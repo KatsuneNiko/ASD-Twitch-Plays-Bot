@@ -16,6 +16,12 @@ strategy:
     Build:
       python.version: '3.11'
 
+variables:
+  - name: pip_cache_dir
+    value: $(Pipeline.Workspace)/.pip
+  - name: npm_config_cache
+    value: $(Pipeline.Workspace)/.npm
+
 steps:
 - task: UsePythonVersion@0
   inputs:
@@ -26,6 +32,22 @@ steps:
   inputs:
     versionSpec: '18.x'
   displayName: 'Use Node.js'
+
+- task: Cache@2
+  inputs:
+    key: 'pip | "$(Agent.OS)" | requirements.txt'
+    restoreKeys: |
+      pip | "$(Agent.OS)"
+    path: $(pip_cache_dir)
+  displayName: Cache pip
+
+- task: Cache@2
+  inputs:
+    key: 'npm | "$(Agent.OS)" | package-lock.json'
+    restoreKeys: |
+       npm | "$(Agent.OS)"
+    path: $(npm_config_cache)
+  displayName: Cache npm
 
 - script: |
     python -m pip install --upgrade pip
