@@ -32,8 +32,13 @@ steps:
     pytest
   displayName: 'Run Pytest test cases'
 
+- script: |
+    pip install pyinstaller
+    pyinstaller app.py --add-data="./backend;./backend" --onedir --distpath="dist-python"
+  displayName: 'Build Python Program'
+
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: drop
+    pathToPublish: 'dist-python'
+    artifactName: 'python-exe'
     publishLocation: 'Container'
