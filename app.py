@@ -1,3 +1,4 @@
+import sys
 import os
 from flask import Flask, send_from_directory
 from flask import request
@@ -84,4 +85,7 @@ def catch_all(path):
 	    return send_from_directory('build', 'index.html')
 
 if __name__ == "__main__":
-	app.run(port=3000, debug=(os.environ["ENV"] != "production"))
+	if getattr(sys, 'frozen', False):
+		os.chdir(sys._MEIPASS)
+		print('Backend Folder: ' + sys._MEIPASSS)
+	app.run(port=3000, debug=(os.getenv('ENV') != 'production'))
