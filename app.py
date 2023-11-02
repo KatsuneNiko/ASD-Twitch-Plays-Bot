@@ -1,3 +1,4 @@
+import os
 from flask import Flask, send_from_directory
 from flask import request
 from backend import TwitchConnect, ProfileManager
@@ -83,5 +84,4 @@ def catch_all(path):
 	    return send_from_directory('build', 'index.html')
 
 if __name__ == "__main__":
-	app.run(debug=True) 
-	app.run(port=3000)
+	app.run(port=3000, debug=(os.environ["ENV"] != "production"))
