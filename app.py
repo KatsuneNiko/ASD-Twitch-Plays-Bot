@@ -74,10 +74,13 @@ def test():
 		"SOP": "anarchy",
     }
 
-@app.route('/', defaults={'path': ''})
+@app.route('/', defaults={'path': 'index.html'})
 @app.route('/<path:path>')
 def catch_all(path):
-    return send_from_directory('build', path)
+	try:
+		return send_from_directory('build', path)
+	except:
+	    return send_from_directory('build', 'index.html')
 
 if __name__ == "__main__":
 	app.run(debug=True) 
