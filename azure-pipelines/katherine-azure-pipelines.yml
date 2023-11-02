@@ -13,7 +13,7 @@ pool:
   vmImage: windows-latest
 strategy:
   matrix:
-    Python311:
+    Build:
       python.version: '3.11'
 
 steps:
@@ -31,13 +31,6 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'Run Pytest test cases'
-
-- task: PublishCodeCoverageResults@2
-  inputs:
-    summaryFileLocation: '**/coverage.xml'
-  displayName: 'Generate coverage report'
-
-- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
 
 - task: PublishBuildArtifacts@1
   inputs:
