@@ -35,7 +35,7 @@ steps:
 
 - task: Cache@2
   inputs:
-    key: 'pip | "$(Agent.OS)" | requirements.txt'
+    key: 'pip | "$(Agent.OS)" | backend/requirements.txt'
     restoreKeys: |
       pip | "$(Agent.OS)"
     path: $(pip_cache_dir)
