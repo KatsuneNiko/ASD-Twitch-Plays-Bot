@@ -61,8 +61,12 @@ steps:
   displayName: 'Run Pytest test cases'
 
 - script: |
+    npm run build
+  displayName: 'npm build'
+
+- script: |
     pip install pyinstaller
-    pyinstaller app.py --add-data="./backend;./backend" --onedir --distpath="dist-python"
+    pyinstaller app.py --add-data="./backend;./backend" --add-data="./build;./build" --onedir --distpath="dist-python"
   displayName: 'Build Python Program'
 
 - task: PublishBuildArtifacts@1
@@ -70,10 +74,6 @@ steps:
     pathToPublish: 'dist-python'
     artifactName: 'python-exe'
     publishLocation: 'Container'
-
-- script: |
-    npm run build
-  displayName: 'npm build'
 
 - task: PublishBuildArtifacts@1
   inputs:

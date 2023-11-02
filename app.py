@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, send_from_directory
 from flask import request
 from backend import TwitchConnect, ProfileManager
 import threading
@@ -73,10 +73,11 @@ def test():
 		"getSOP": TwitchConnect.styleOfPlay,
 		"SOP": "anarchy",
     }
-	
-@app.route("/ignore") 
-def index(): 
-	return "Homepage of GeeksForGeeks"
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return send_from_directory('build', path)
 
 if __name__ == "__main__":
 	app.run(debug=True) 
