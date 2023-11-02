@@ -66,7 +66,8 @@ steps:
 
 - script: |
     pip install pyinstaller
-    pyinstaller app.py --add-data="./backend;./backend" --add-data="./build;./build" --onedir --distpath="dist-python" --paths="backend" --runtime-hook="scripts/BuildRuntimeHook.py"
+    pyinstaller app.py --add-data="./build;./build" --onedir --distpath="dist-python" --paths="backend" --runtime-hook="scripts/BuildRuntimeHook.py"
+    xcopy ".\backend\profiles" ".\dist-python\app\backend\profiles\" /F /R /Y /I
   displayName: 'Build Python Program'
 
 - task: PublishBuildArtifacts@1
