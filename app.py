@@ -90,4 +90,4 @@ def catch_all(path):
 	    return send_from_directory('build', 'index.html')
 
 if __name__ == "__main__":
-	app.run(port=3000, debug=(os.getenv('ENV') != 'production'))
+	app.run(host='0.0.0.0', port=3000, debug=(os.getenv('ENV') != 'production'))
