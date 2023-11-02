@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, send_from_directory
 from flask import request
 from flask import redirect
 from backend import TwitchConnect, ProfileManager, KeyboardInputs
@@ -88,7 +88,15 @@ def postCRUDKeyboard():
 		keyword = body['deleteKeyword']
 		KeyboardInputs.apiDeleteKeybind(keyword)
 	return redirect("http://localhost:3000/CRUDKeyboard", code=302)
-	
+
+@app.route('/', defaults={'path': 'index.html'})
+@app.route('/<path:path>')
+def catch_all(path):
+	try:
+		return send_from_directory('build', path)
+	except:
+	    return send_from_directory('build', 'index.html')
+
 @app.route("/ignore") 
 def index(): 
 	return "Homepage of GeeksForGeeks"

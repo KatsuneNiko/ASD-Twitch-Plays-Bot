@@ -13,8 +13,14 @@ pool:
   vmImage: windows-latest
 strategy:
   matrix:
-    Python311:
+    Build:
       python.version: '3.11'
+
+variables:
+  - name: pip_cache_dir
+    value: $(Pipeline.Workspace)/.pip
+  - name: npm_config_cache
+    value: $(Pipeline.Workspace)/.npm
 
 steps:
 - task: UsePythonVersion@0
@@ -22,12 +28,55 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Use Node.js'
+
+- task: Cache@2
+  inputs:
+    key: 'pip | "$(Agent.OS)" | backend/requirements.txt'
+    restoreKeys: |
+      pip | "$(Agent.OS)"
+    path: $(pip_cache_dir)
+  displayName: Cache pip
+
+- task: Cache@2
+  inputs:
+    key: 'npm | "$(Agent.OS)" | package-lock.json'
+    restoreKeys: |
+       npm | "$(Agent.OS)"
+    path: $(npm_config_cache)
+  displayName: Cache npm
+
 - script: |
     python -m pip install --upgrade pip
     pip install -r backend/requirements.txt
+    npm install
   displayName: 'Install dependencies'
 
 - script: |
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'Run Pytest test cases'
+
+- script: |
+    npm run build
+  displayName: 'npm build'
+
+- script: |
+    pip install pyinstaller
+    pyinstaller app.py --add-data="./backend;./backend" --add-data="./build;./build" --onedir --distpath="dist-python"
+  displayName: 'Build Python Program'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'dist-python'
+    artifactName: 'python-exe'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'build'
+    artifactName: 'react-bundle'
+    publishLocation: 'Container'
