@@ -2,13 +2,13 @@ import os
 import threading
 import TwitchConnect as TwitchConnect
 import ProfileManager as ProfileManager
-import DiscordSetup
+import Discordsetup
 
 if __name__ == '__main__':
     userInput = ''
     TwitchConnect.channelname = input("Input the Twitch channel you'd like to connect to: ")
     t1 = threading.Thread(target=TwitchConnect.twitch)
-    t2 = threading.Thread(target=DiscordSetup.runDiscordBot)
+    t2 = threading.Thread(target=Discordsetup.runDiscordBot)
     t2.start()
     os.system('cls')
 

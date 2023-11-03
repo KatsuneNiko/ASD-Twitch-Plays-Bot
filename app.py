@@ -1,7 +1,8 @@
 import os
 from flask import Flask, send_from_directory
 from flask import request
-from backend import TwitchConnect, ProfileManager
+from flask import redirect
+from backend import TwitchConnect, ProfileManager, KeyboardInputs
 import threading
 
 app = Flask(__name__, static_folder=None)
@@ -63,23 +64,40 @@ def StyleOfPlay():
 @app.route('/StyleOfPlay', methods=['POST'])
 def postStyleOfPlay():
 	currentSOP = TwitchConnect.styleOfPlay
-	if request.method == 'POST':
-		print('post app')
-	if currentSOP == 'anarchy':
-		TwitchConnect.setStyleOfPlay('democratic', 5)
-	else:
-		TwitchConnect.setStyleOfPlay('anarchy', 5)
+	body = request.get_json()
+	if body['trigger'] == 'true':
+		if currentSOP == 'anarchy':
+			TwitchConnect.setStyleOfPlay('democratic', 5)
+		else:
+			TwitchConnect.setStyleOfPlay('anarchy', None)
 	return {
 		"getSOP": TwitchConnect.styleOfPlay,
-		"SOP": "anarchy"}
-	
+		}
         
-@app.route("/CRUDKeyboard") 
-def test(): 
+@app.route("/CRUDKeyboard", methods=['GET']) 
+def CRUDKeyboard(): 
 	return {
-		"getSOP": TwitchConnect.styleOfPlay,
-		"SOP": "anarchy",
+		"txtArray": ProfileManager.viewProfileAPI(),
+		"profileName": ProfileManager.returnProfile(),
     }
+
+@app.route('/CRUDKeyboard', methods=['POST']) 
+def postCRUDKeyboard(): 
+	body = request.form
+	print(body)
+	if(body['formOneOrTwo'] == 'add'):
+		action = body['action']
+		duration = body['duration']
+		keyword = body['keyword']
+		keybind = body['keybind']
+		currentProfile = ProfileManager.returnProfile()
+		KeyboardInputs.apiAddKeybind(action, duration, keyword, keybind, currentProfile)
+	elif (body['formOneOrTwo'] == 'delete'):
+		keyword = body['deleteKeyword']
+		currentProfile = ProfileManager.returnProfile()
+		KeyboardInputs.apiDeleteKeybind(keyword, currentProfile)
+		print("At API, when delete, profile = ", ProfileManager.profile)
+	return redirect("http://localhost:3000/CRUDKeyboard", code=302)
 
 @app.route('/', defaults={'path': 'index.html'})
 @app.route('/<path:path>')
@@ -88,6 +106,10 @@ def catch_all(path):
 		return send_from_directory('build', path)
 	except:
 	    return send_from_directory('build', 'index.html')
+
+@app.route("/ignore") 
+def index(): 
+	return "Homepage of GeeksForGeeks"
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=3000, debug=(os.getenv('ENV') != 'production'))
