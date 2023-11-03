@@ -20,8 +20,6 @@ styleOfPlay = 'anarchy'
 votingTime = 10.0
 totalMessages = []
 
-channelname = ''
-
 ##Server and port information
 SERVER = "irc.twitch.tv"
 PORT = 6667
@@ -31,7 +29,7 @@ pauseEvent = threading.Event()
 #Allows twitch while loop to be paused.
 exitEvent = threading.Event()
 
-def twitch():
+def twitch(channelname: str):
     ##OAuth token and bot account information
     ##tokens can be found here... https://twitchapps.com/tmi/
     PASS = "oauth:acg413d5tln1omi9omb72lbkgje0e1"
@@ -44,57 +42,57 @@ def twitch():
 
     ##Initialize socket and connect to Twitch IRC server
     irc = socket.socket()
+    irc.settimeout(0.2)
     irc.connect((SERVER, PORT))
     irc.send(f"PASS {PASS}\nNICK {NICK}\nJOIN #{CHANNEL}\n".encode())
     
     #Handles twitch chat interaction
     while True:
-        try:
-            readbuffer = irc.recv(1024).decode()
-        except:
-            readbuffer = ""
-        for line in readbuffer.split("\r\n"):
-            if line == "":
-                continue
-            if "PING :tmi.twitch.tv" in line:
-                msgg = "PONG :tmi.twitch.tv\r\n".encode()
-                irc.send(msgg)
-                continue
-            else:
-                user = getUser(line)
-                message = getMessage(line)
-                if user == "" or user == " ":
-                    continue
-                print(user.title() + " : " + message)
-                #Call the keyboard input functions
-                MouseInputs.MouseInputs(message)
-                if styleOfPlay == 'anarchy':
-                    KeyboardInputs.KeyboardInputs(message)
-                elif styleOfPlay == 'democratic':
-                    if democraticStarted == False:
-                        myList.clear()
-                        democraticStarted = True
-                        endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
-                        myList.append(message)
-                    elif democraticStarted == True:
-                        if datetime.datetime.now() >= endTime:
-                            ##print("Total messages: ", *myList)
-                            mostCommon = most_frequent(myList)
-                            KeyboardInputs.KeyboardInputs(mostCommon)
-                            myList.clear()
-                            myList.append(message)
-                            endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
-                        else:
-                            myList.append(message)
-
         if exitEvent.is_set():
-            False
             break
-
         if pauseEvent.is_set():
-            False
-        elif pauseEvent.is_set() == False:
-            True
+            time.sleep(0.2);
+            """Do nothing"""
+        else:
+            try:
+                readbuffer = irc.recv(1024).decode()
+            except:
+                readbuffer = ""
+            for line in readbuffer.split("\r\n"):
+                if line == "":
+                    continue
+                if "PING :tmi.twitch.tv" in line:
+                    msgg = "PONG :tmi.twitch.tv\r\n".encode()
+                    irc.send(msgg)
+                    continue
+                else:
+                    user = getUser(line)
+                    message = getMessage(line)
+                    if user == "" or user == " ":
+                        continue
+                    print(user.title() + " : " + message)
+                    #Call the keyboard input functions
+                    MouseInputs.MouseInputs(message)
+                    if styleOfPlay == 'anarchy':
+                        KeyboardInputs.KeyboardInputs(message)
+                    elif styleOfPlay == 'democratic':
+                        if democraticStarted == False:
+                            myList.clear()
+                            democraticStarted = True
+                            endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                            myList.append(message)
+                        elif democraticStarted == True:
+                            if datetime.datetime.now() >= endTime:
+                                ##print("Total messages: ", *myList)
+                                mostCommon = most_frequent(myList)
+                                KeyboardInputs.KeyboardInputs(mostCommon)
+                                myList.clear()
+                                myList.append(message)
+                                endTime = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                            else:
+                                myList.append(message)
+
+
 
 def joinchat():
     ##Joins Twitch chat

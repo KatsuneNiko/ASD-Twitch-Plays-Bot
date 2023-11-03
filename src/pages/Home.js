@@ -34,6 +34,7 @@ import React, { useEffect, useState } from "react";
  
 export const Home = () => {
   const [twitchActive, setTwitchActive] = useState(false);
+  const [channelName, setChannelName] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -46,7 +47,7 @@ export const Home = () => {
   const handleClick = async () => {
     const request = await fetch('/TwitchConnect', {
       method: 'POST',
-      body: JSON.stringify({ active: !twitchActive }),
+      body: JSON.stringify({ active: !twitchActive, channelName }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -57,9 +58,10 @@ export const Home = () => {
 
   return (
     <div className="home">
-      <h1>ASD-Twitch-Plays-Bot is{twitchActive ? ' ' : ' not '}active!</h1>
+      <h1>ASD-Twitch-Plays-Bot is {twitchActive ? `connected to ${channelName}` : 'not connected!'}</h1>
+      { !twitchActive ? <div>Channel Name: <input value={channelName} onChange={(e) => setChannelName(e.target.value)} /></div> : <></> }
       <button onClick={handleClick}>
-        Start/stop program
+        Start/Stop program
       </button>
     </div>
   );

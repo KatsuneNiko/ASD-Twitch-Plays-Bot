@@ -12,6 +12,7 @@ __pycache__/
 
 # production
 /build
+/dist-python
 
 # misc
 .DS_Store
